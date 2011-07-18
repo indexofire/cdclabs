@@ -10,7 +10,7 @@ from django.template.defaultfilters import slugify
 from django.utils.datastructures import SortedDict
 from django.utils.functional import curry
 from django.utils.translation import ugettext_lazy as _
-from form_designer.utils import JSONFieldDescriptor
+from contrib.form_designer.utils import JSONFieldDescriptor
 
 
 def create_form_submission(model_instance, form_instance, request, **kwargs):
@@ -61,7 +61,9 @@ class Form(models.Model):
             ('required_css_class', 'required'),
             ('error_css_class', 'error'),
             ))
-
+        
+        fields.setdefault('submitter', 'admin')
+        
         for field in self.fields.all():
             field.add_formfield(fields, self)
 
@@ -98,23 +100,38 @@ class FormField(models.Model):
         ('radio', _('radio'),
          curry(forms.ChoiceField, widget=forms.RadioSelect)),
         ('multiple-select', _('multiple select'), forms.MultipleChoiceField),
+        ('hidden', _('hidden'), curry(forms.CharField, editable=False)),
     ]
 
     form = models.ForeignKey(Form, related_name='fields',
         verbose_name=_('form'))
     ordering = models.IntegerField(_('ordering'), default=0)
 
-    title = models.CharField(_('title'), max_length=100)
+    title = models.CharField(_('title'), max_length=100, unique=True)
     name = models.CharField(_('name'), max_length=100)
     type = models.CharField(
-        _('type'), max_length=20, choices=[r[:2] for r in FIELD_TYPES])
+        _('type'),
+        max_length=20,
+        choices=[r[:2] for r in FIELD_TYPES],
+    )
     choices = models.CharField(
-        _('choices'), max_length=1024, blank=True,
-        help_text=_('Comma-separated'))
+        _('choices'),
+        max_length=1024,
+        blank=True,
+        help_text=_('Comma-separated'),
+    )
+    default_value = models.CharField(
+        _('default value'),
+        max_length=100,
+        blank=True,
+        help_text=_('Default value for this field'),
+    )
     help_text = models.CharField(
-        _('help text'), max_length=1024, blank=True,
-        help_text=_('Optional extra explanatory text beside the field'))
-
+        _('help text'),
+        max_length=1024,
+        blank=True,
+        help_text=_('Optional extra explanatory text beside the field')
+    )
     is_required = models.BooleanField(_('is required'), default=True)
 
     class Meta:
@@ -171,6 +188,7 @@ class FormSubmission(models.Model):
         'datetime', or 'path' to include additional meta data.
         """
         data_dict = eval(self.data)
+        print data_dict
         data = SortedDict()
         field_names = []
         for field in self.form.fields.all():

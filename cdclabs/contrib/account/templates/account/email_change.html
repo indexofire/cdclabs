@@ -3,9 +3,9 @@
 
 {% block content %}
 <h1>{% trans "Change email" %}</h1>
-<form method="post" action="{% url auth_email_change %}">
+<form method="post" action="{% url auth_email_change %}">{% csrf_token %}
     <div class="wide">{{ form.as_p }}</div>
-    <p><input type="submit" value="{% trans "Save" %}" /></p>
+    <p><input type="submit" value="{% trans 'Save' %}" /></p>
 </form>
 
 {% endblock %}

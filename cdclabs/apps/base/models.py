@@ -53,6 +53,14 @@ Page.register_templates(
             ('right', _('Right')),
         ),
     },
+    {
+        'key': 'main',
+        'title': _('Main Page'),
+        'path': 'main.html',
+        'regions': (
+            ('main', _('Main content area')),
+        ),
+    },
 )
 
 

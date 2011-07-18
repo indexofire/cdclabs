@@ -9,19 +9,19 @@ from django.http import HttpResponseRedirect
 from django.contrib.sites.models import Site
 from django.shortcuts import redirect
 from urlauth.util import wrap_url
-from account.forms import (
+from contrib.account import signals
+from contrib.account.forms import (
     PasswordResetForm,
     PasswordChangeForm, 
     LoginForm, 
     EmailChangeForm
 )
-from account.util import (
+from contrib.account.util import (
     email_template, 
     build_redirect_url, 
     render_to, 
     load_class,
 )
-from account import signals
 
 
 RegistrationForm = load_class(settings.ACCOUNT_REGISTRATION_FORM)
