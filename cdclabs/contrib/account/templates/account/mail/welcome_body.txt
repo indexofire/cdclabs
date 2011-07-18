@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}Congratulations! You are now a member of {{ domain }}.{% endblocktrans %}

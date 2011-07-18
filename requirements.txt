@@ -1,0 +1,9 @@
+django
+south
+django-debug-toolbar
+lxml
+pygments
+docutils
+django-mptt
+BeautifulSoup
+django-urlauth

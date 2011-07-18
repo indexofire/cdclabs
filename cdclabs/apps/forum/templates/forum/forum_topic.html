@@ -1,0 +1,93 @@
+{% extends 'forum/forum_base.html' %}
+{% load i18n forum %}
+
+{% block title %}{{ topic.subject }} - {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}{{ block.super }}{% include "forum/includes/topic_brd_crumbs.html" %}{% endblock breadcrumb %}
+
+{% block content %}
+{% load pagination_tags %}
+{% autopaginate replies TOPIC_PAGE_SIZE %}
+<div class="block">
+  <h3 class="block_title">
+    <span>{% trans "Topic" %}: </span>
+    {% if topic.closed %}
+      <strong>[{% trans "Closed" %}]</strong>
+    {% endif %}
+    {% if topic.sticky %}
+      <strong>[{% trans "Sticky" %}]</strong>
+    {% endif %}		
+    <a href="{% url forum_topic topic.id %}">{{ topic.subject }}</a>  
+    <span style="float:right">
+      {% if user.is_authenticated %}
+        <a class="post" href="{% url forum_new_topic topic.forum.pk %}"><span>{% trans "Post new topic" %}</span></a>
+      {% else %}
+        {% trans "You must" %} <a href="{% url auth_login %}">{% trans "Login" %}</a> {% trans "or" %} <a href="{% url registration_register %}">{% trans "register" %}</a> {% trans "to post a topic" %}
+      {% endif %}
+    </span> 
+  </h3>
+  <div class="block_content">
+    {% include 'forum/includes/topic_detail.html' %}
+  </div>
+</div>
+
+<div class="block_plain" style="margin-bottom:10px">
+<div class="cell_head">
+  <span>{% trans "replies" %}: {{ topic.num_replies|add:"-1"}} | {% trans "views" %}: {{ topic.num_views }}</span>
+  <span style="float:right">
+    {% if user.is_authenticated %}
+      <a class="reply" href="{% url forum_new_replay topic.pk %}"><span>{% trans "Post a reply" %}</span></a>
+    {% else %}
+      {% trans "You must" %} <a href="{% url auth_login %}">{% trans "Login" %}</a> {% trans "or" %} <a href="{% url registration_register %}">{% trans "register" %}</a> {% trans "to post a reply" %}
+    {% endif %}
+  </span>
+</div>
+{% for reply in replies %}
+  <div class="cell">{% include 'forum/includes/reply_detail.html' %}</div>
+{% endfor %}
+<div class="cell_foot">{% paginate %}</div>
+</div>
+
+{% if not topic.closed %}
+  {% if user.is_authenticated %}
+  <div class="block_plain" style="padding: 10px;margin-bottom:10px">
+  <div class="main-subhead">
+    <h2 class="hn"><span>{% trans "Quick reply to this topic" %}</span></h2>
+  </div>
+
+  <div class="main-content main-frm" id="brd-qpost">
+    <p class="content-options options">{% trans "You may use" %}:
+      <span class="item1"><a title="Help with: BBCode" href="http://fluxbb.org/forums/help/bbcode/" class="exthelp">BBCode</a></span>
+      <span><a title="Help with: Images" href="http://fluxbb.org/forums/help/img/" class="exthelp">Images</a></span>
+      <span><a title="Help with: Smilies" href="http://fluxbb.org/forums/help/smilies/" class="exthelp">Smilies</a></span>
+    </p>
+    
+    <form action="{% url forum_new_replay topic.pk %}" accept-charset="utf-8" method="post" class="frm-form">{% csrf_token %}
+      <fieldset class="frm-group group1">
+        <legend class="group-legend"><strong>{% trans "Compose your post" %}</strong></legend>
+        <div class="txt-set set1">
+          <div class="txt-box textarea required">
+            <label for="fld1"><span>{% trans "Write message" %}: <em>({% trans "Required" %})</em></span></label>
+            <div class="txt-input">
+              <span class="fld-input"><textarea cols="95" rows="7" name="message" id="fld1"></textarea></span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="frm-buttons">
+        <span class="submit"><input type="submit" value="Submit" name="submit"/></span>
+        <span class="submit"><input type="submit" value="Preview" name="preview"/></span>
+      </div>
+    </form>
+  </div>
+  </div>
+  {% endif %}
+{% endif %}
+
+{% endblock content%}
+
+{% block other %}
+    <div id="replybox">
+      <div id="actionbox"></div>
+    </div>
+{% endblock other %}

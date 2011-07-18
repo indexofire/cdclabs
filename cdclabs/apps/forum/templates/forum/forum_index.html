@@ -1,0 +1,130 @@
+{% extends "forum/forum_base.html" %}
+{% load i18n forum avatar_tags %}
+
+{% block breadcrumb %}{{ block.super }}<li><span>{% trans "Forum Index" %}</span></li>{% endblock breadcrumb %}
+
+{% block latest_topics %}
+<style type="text/css">
+.trancate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 430px;
+    height:32px;
+    line-height:32px;
+}
+</style>
+
+<div class="block_plain">
+  <div class="cell_head">{% trans "Latest Topic" %}</div>
+  {% include "forum/includes/topic_list.html" %}
+  <div class="cell_foot">Read More</div>
+</div>
+{% endblock latest_topics %}
+
+{% block forum %}
+<div>
+{% for category in categories %}
+  <div style="border-bottom:1px solid #CCC;padding:5px 10px">
+    <h3>{{ category }}:</h3>
+    {% for forum in category.forum_set.all %}
+      <span class="forum_name"><a href="{% url forum_forum forum.slug %}">{{ forum.name }}</a></span> |
+    {% endfor %}
+  </div>
+{% endfor %}
+</div>
+{% endblock forum %}
+
+
+
+{% block forums %}
+<!-- forum-wrap begins -->
+<div id="forum_wrap" class="forum">
+
+<!-- forum-index begins -->
+<div id="forum_index" class="forum-page basic_page">
+  <div class="hr"><hr /></div>
+  <!-- forum-main begins -->
+  <div id="forum_main">
+    <div class="main_head">
+      <h1 class="hn"><span>{{ FORUM_TITLE }}</span></h1>
+    </div>
+    {% for category in categories %}
+    <div class="main_subhead">
+      <h2 class="hn"><span>{{ category }}</span></h2>
+      <p class="item_summary">
+        <span>
+          <strong class="info_topics">{% trans "topics" %}</strong>,
+          <strong class="info_posts">{% trans "posts" %}</strong>,
+          <strong class="info_lastpost">{% trans "last post" %}</strong>
+        </span>
+      </p>
+    </div>
+    <div class="main_content main_category">
+    {% for forum in category.forum_set.all %}
+    <!-- forum begins -->
+      <div id="forum" class="main-item {% cycle 'odd' 'even' %} {% if forloop.first %}main_item1{% endif %}">
+        <span class="icon "><!-- --></span>
+        <div class="item_subject">
+          <h3 class="hn"><a href="{% url forum_forum forum.slug %}"><span>{{ forum }}</span></a></h3>
+          <p>{{ forum.description }}</p>
+        </div>
+        <ul class="item_info">
+          <li class="info_topics">
+            <strong>{{ forum.num_topics }} </strong> <span class="label">{% trans "topics" %}</span>
+          </li>
+          <li class="info_posts">
+            <strong>{{ forum.num_posts }} </strong> <span class="label">{% trans "posts" %}</span>
+          </li>
+          <li class="info_lastpost">
+            <span class="label">{% trans "Last post" %}:</span>
+            <strong>{{ forum.get_last_post.update|timesince }}</strong>
+            <cite>by {{ forum.get_last_post.posted_by }}</cite>
+          </li>
+        </ul>
+      </div>
+    <!-- forum ends -->
+    {% endfor %}
+    </div>
+  <!-- forum-#id ends -->
+  {% endfor %}
+  </div>
+  <!-- forum-main ends -->
+
+  <!-- forum_qpost -->
+
+  <!-- forum-stats begins -->
+  <div id="forum_stats" class="gen_content">
+    <h2 class="hn"><span>Forum statistics</span></h2>
+    <ul>
+      <li class="st_users">
+        <span>{% trans "Total number of registered users" %}: <strong>{{ total_users }} </strong></span>
+      </li>
+      <li class="st_users">
+        <span>{% trans "Newest registered user" %}:
+          <strong><a href="{% url profile_detail last_registered_user.username %}">{{ last_registered_user.username }}</a></strong>
+        </span>
+      </li>
+      <li class="st_activity">
+        <span>{% trans "Total number of topics" %}: <strong>{{ total_topics }}</strong></span>
+      </li>
+      <li class="st_activity">
+        <span>{% trans "Total number of posts" %}: <strong> {{ total_posts }} </strong></span>
+      </li>
+    </ul>
+  </div>
+  <!-- forum-stats ends -->
+
+  <div class="gen_content" id="forum_online">
+    <h3 class="hn">
+      <span>
+        {% trans "Currently online" %} <strong> {{ total_onlines }} </strong> ( <strong> {{ total_onlines_guest }} </strong> {% trans "guests" %}, <strong>{{ total_onlines_user }}</strong> {% trans "registered user" %} )
+      </span>
+    </h3>
+  </div>
+  </div>
+  <!-- forum-index ends -->
+</div>
+<!-- forum-wrap ends -->
+
+{% endblock forums %}

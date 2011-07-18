@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% block title %}{{ FORUM_TITLE }}{{ FORUM_SUB_TITLE }}{% endblock %}
+
+{% block extra_head %}{{ block.super }}{% include "forum/includes/styles.html" %}{% endblock extra_head %}
+
+{% block content %}
+<div class="span-16">
+{% block latest_topics %}{% endblock latest_topics %}
+</div>
+<div class="span-8 last">
+<div class="block">
+  <h3 class="block_title">{% trans "Forum" %}</h3>
+  <div class="block_content">{% block forum %}{% endblock forum %}</div>
+</div>
+</div>
+{% endblock %}

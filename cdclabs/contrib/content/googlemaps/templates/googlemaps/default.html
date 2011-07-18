@@ -1,0 +1,22 @@
+{% load i18n feincms_tags %}
+
+<div class="plugin_googlemap">
+    <!--  ATTENTION: set a height for this div in CSS -->
+    <div id="google-map-{{ object.id }}" class="googlemap-map"></div>
+    {% if object.route_planer %}
+    <form method="get" action="http://maps.google.com/" class="googlemap-routeplaner">{% csrf_token %}
+	<p>{{ object.route_planer_title }}:</p>
+	<fieldset>
+	    <label for="saddr">{% trans "Your address" %}:</label>
+	    <input id="saddr" name="saddr" class="textinput" value="" type="text" />
+	    <input name="daddr" value="{{ object.address }}, {{ object.zipcode }} {{ object.city }}" type="hidden" />
+	    <input value="{% trans 'calculate route' %}" class="input_submit" type="submit" />
+	</fieldset>
+    </form>
+    {% endif %}
+</div>
+
+
+
+
+

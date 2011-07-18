@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}Welcome to the {{ domain }}{% endblocktrans %}

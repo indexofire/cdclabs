@@ -1,0 +1,30 @@
+{% load i18n forum avatar_tags %}
+
+<div id="topic{{ topic.pk }}" class="main_item {% cycle 'odd' 'even' %}{% if forloop.first %} main_item1{% endif %} {{ topic|topic_state }}" style="padding:10px">
+  <div class="span-2"><a href="{% url profile_detail topic.posted_by.username %}" title="{{ topic.posted_by }}">{% avatar topic.posted_by 64 %}</a></div>
+  <span class="item-starter">{% trans "Posted" %} {{ topic.created_on|lbtimesince }} by <cite>{{ topic.posted_by }}</cite></span>
+    <!--{% post_paginate topic.num_replies TOPIC_PAGE_SIZE %}-->
+  <ul class="item-info" style="list-style:none">
+	<li class="info-lastpost">
+	  <span class="label">{% trans "Last post" %}</span>
+	  <strong><a href="{{ topic.get_absolute_url }}">{{ topic.get_last_post.update|lbtimesince }}</a></strong>
+	  <cite>by {{ topic.get_last_post.posted_by }}</cite>
+	</li>
+  </ul>
+  <div class="topic_message">
+    {{ thread.message|bbcode|safe }}
+    <div class="postfoot">
+      <p class="post-actions" style="margin:0px">
+        <span class="created">{{ thread.created_on }}</span>
+        {% if user.is_authenticated %}
+        <span class="quote-post"><a href="{% url forum_new_replay topic.pk %}?qid={{ thread.pk }}">{% trans "quote" %}</a></span> 
+        {% if user == reply.posted_by or user.is_staff %}
+        <span class="edit-post"><a href="{% url forum_post_edit thread.pk %}">{% trans "edit" %}</a></span> 
+        {% endif %}
+        </span>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+

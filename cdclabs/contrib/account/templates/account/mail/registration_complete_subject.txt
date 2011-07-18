@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}Successfuly registration on {{ domain }}{% endblocktrans %}

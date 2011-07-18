@@ -1,0 +1,12 @@
+{% load i18n %}
+{% ifequal mode "html" %}
+
+{% blocktrans %}You have begun registration on {{ domain }}{% endblocktrans %}.
+{% blocktrans %}If you want activate you account {{ login }}, follow the <a href="{{ url }}">link</a> please.{% endblocktrans %}
+
+{% else %}
+
+{% blocktrans %}You have begun registration on {{ domain }}{% endblocktrans %}.
+{% blocktrans %}If you want activate you account {{ login }}, follow the link please: {{ url }}{% endblocktrans %}
+
+{% endifequal %}

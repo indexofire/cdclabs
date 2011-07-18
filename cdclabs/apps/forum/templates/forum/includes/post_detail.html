@@ -1,0 +1,84 @@
+{% load i18n %}
+{% load forum %}
+{% load avatar_tags %}
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tbody>
+  <tr>
+    <td class="avatar">
+      <a href="{% url profile_detail post.posted_by.username %}" title="{{ post.posted_by }}">{% avatar post.posted_by 48 %}</a>
+    </td>
+    <td style="padding:10px 5px 0px 12px;vertical-align:top">
+      <p class="post_message">{{ post.message|bbcode|safe }}</p>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+
+<!--
+<div class="post {% cycle 'odd' 'even' %} {{ forloop|post_style }}" id="p{{ post.pk }}">
+  <div class="posthead">
+      <span class="post-num">{% page_item_idx page_obj forloop %}</span>
+      <span class="post-byline">
+        <span>{% trans "Topic by" %}</span>
+        <a href="{% url profile_detail post.posted_by.username %}">{{post.posted_by.username}}</a>
+      </span>
+      <span class="post-link">{{ post.created_on|lbtimesince }}</span>
+  </div>
+  
+  <div class="postbody">
+    <div class="post-author">
+      <ul class="author-ident">
+        <li class="useravatar"><a href="{% url profile_detail post.posted_by.username %}">{% avatar post.posted_by 48 %}</a></li>
+        <li class="username"> <a href="{% url profile_detail post.posted_by.username %}">{{ post.posted_by.username }}</a> </li>
+        <li class="usertitle"><span>{% trans "Member" %}</span></li>
+      </ul>
+    </div>
+    
+    <div class="post-entry">
+      <div class="entry-content">
+        <p>{{ post.message|bbcode|safe }}</p>
+        {% if post.edited_by %}
+          <p class="postedit"><em>Last edited by {{ post.edited_by }} ({{ post.updated_on|date:"Y-m-d H:i" }})</em></p>
+        {% endif %}
+
+        {% if post.attachments.all %}
+          <div class="entry-attachments">
+            <b>{% trans "Attachments" %}:</b>
+            <ul>
+              {% for attachment in post.attachments.all %}
+              <li>
+                <a href="{{attachment.file.url}}" target="_blank">{{ attachment.org_filename }}</a>
+                <span>{{ attachment.description }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+-->
+
+  <div class="postfoot">
+    <div class="post-options">
+      <p class="post-contacts"></p>
+      <p class="post-actions" style="margin:0px">
+        <span class="fade">By <strong><a href="{% url profile_detail post.posted_by.username %}" class="dark">{{ post.posted_by.username }}</a></strong> in <strong><a href="{% url forum_forum topic.forum.slug %}" class="dark">{{ topic.forum }}</a></strong>
+        <span class="created">{{ post.created_on }}</span>
+        {% if user.is_authenticated %}
+        <span class="quote-post"><a href="{% url forum_new_replay topic.pk %}?qid={{post.pk}}">{% trans "quote" %}</a></span> 
+        {% if user == post.posted_by or user.is_staff %}
+        <span class="edit-post"><a href="{% url forum_post_edit post.pk %}">{% trans "edit" %}</a></span> 
+        {% endif %}
+        </span>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+
+
