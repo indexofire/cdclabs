@@ -165,11 +165,20 @@ body {
 #top_menu a.active:hover {
     border-top-color: #DD4B39;
 }
-#control {
+#control_panel {
     float: right;
+    list-style: none;
+    font-size: 1em;
+    height: 30px;
+    padding: 0px;
+    margin: 0px;
+    display: inline;
 }
-#control a {
-    display: block;
+#control_panel a {
+    margin: 0px 1px;
+    padding: 6px 10px;
+    color: #CCC;
+    border-top: 2px solid #2D2D2D;
 }
 #header_sub {
     background: #F1F1F1;
@@ -180,25 +189,13 @@ body {
     padding: 20px 0px 0px 0px;
 }
 #user_panel {
-    background: #58585D;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    -moz-border-radius-bottomleft: 8px;
-    -moz-border-radius-bottomright: 8px;
     float: right;
-    padding: 0px 10px;
-    margin-top: -90px;
-    height: 36px;
-    line-height: 36px;
     color: #FFF;
 }
 #user_panel a {
     margin: 1px 4px;
     padding: 3px 6px;
-    border-radius: 2px;
-    -moz-border-radius: 2px;
     font-weight: bold;
-    text-shadow: rgba(0, 0, 0, 0.6) 1px 1px 0px;
 }
 #user_panel a:hover {
     background: #9C9D9E;

@@ -15,15 +15,21 @@
 <body>
 
 <div id="header" class="clearfix">
-  <ol id="top_menu">
-  {% feincms_navigation of feincms_page as toplevel level=1 %}
-  {% for p in toplevel %}
-    <li><a {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>
-  {% endfor %}
-  </ol>
-  <div id="control">
-    <span><a href="{% url auth_login %}">{% trans 'Login' %}</a></span>
-    <span><a href="{% url registration_register %}">{% trans 'Register' %}</a></span>
+  <div class="container clear">
+    <div class="span-18">
+      <ol id="top_menu">
+      {% feincms_navigation of feincms_page as toplevel level=1 %}
+      {% for p in toplevel %}
+        <li><a {% if p|is_equal_or_parent_of:feincms_page %}class="active"{% endif %} href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>
+      {% endfor %}
+      </ol>
+    </div>
+    <div class="span-6 last">
+      <ul id="user_panel">
+        <li><a style="color:#EFEFEF" href="{% url auth_login %}">{% trans 'Login' %}</a></li>
+        <li><a style="color:#EFEFEF" href="{% url registration_register %}">{% trans 'Register' %}</a></li>
+      </ul>
+    </div>
   </div>
 </div>
 
