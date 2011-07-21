@@ -6,6 +6,7 @@ from feincms.module.page.models import Page
 from feincms.content.application.models import ApplicationContent
 from feincms.content.richtext.models import RichTextContent
 from feincms.content.image.models import ImageContent
+from feincms.content.comments.models import CommentsContent
 from contrib.content.googlemaps.models import GoogleMapsContent
 from contrib.content.markup.models import MarkupContent
 from contrib.content.form.models import FormContent
@@ -92,3 +93,6 @@ Page.create_content_type(
 
 # Add form content type
 Page.create_content_type(FormContent)
+
+# Add comment content type
+Page.create_content_type(CommentsContent)
