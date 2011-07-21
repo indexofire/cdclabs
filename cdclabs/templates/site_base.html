@@ -7,13 +7,29 @@
   <title>{% block title %}{{ feincms_page.title }}{% endblock title %}</title>
   {% block meta %}{% endblock meta %}
   <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/global_style.css" />
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/js/jqtransformplugin/jqtransform.css" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/lightbox_me/jquery.lightbox_me.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/jqtransformplugin/jquery.jqtransform.js"></script>
   {% block extra_head %}{% endblock extra_head %}
   {{ feincms_page.object.media }}
+<script type="text/javascript" charset="utf-8">
+$(function() {function launch() {
+    $('#sign_up').lightbox_me({centered: true, onLoad: function() {
+        $('#sign_up').find('input:first').focus()
+        }});
+    }
+    $('#login').click(function() {
+        $("#loader").lightbox_me({centered:  true});
+        setTimeout(launch, 100);
+        return false;
+        });
+    $('table  tr:nth-child(even)').addClass('stripe');}
+);
+</script>
 </head>
 
 <body>
-
 <div id="header" class="clearfix">
   <div class="container clear">
     <div class="span-18">
@@ -26,13 +42,28 @@
     </div>
     <div class="span-6 last">
       <ul id="user_panel">
-        <li><a style="color:#EFEFEF" href="{% url auth_login %}">{% trans 'Login' %}</a></li>
-        <li><a style="color:#EFEFEF" href="{% url registration_register %}">{% trans 'Register' %}</a></li>
+        <!--<li><a style="color:#EFEFEF" href="{% url auth_login %}" id="login">{% trans 'Login' %}</a></li>
+        <li><a style="color:#EFEFEF" href="{% url registration_register %}" id="register">{% trans 'Register' %}</a></li>-->
+        <li><a href="#" id="login">login</a></li>
       </ul>
     </div>
   </div>
 </div>
-
+<div id="sign_up" style="display: none">
+                <h3 id="see_id" class="sprited">Can I see some ID?</h3>
+                <span>Please sign in using the form below</span>
+                <div id="sign_up_form">
+                    <label><strong>Username:</strong> <input class="sprited"></label>
+                    <label><strong>Password:</strong> <input class="sprited"></label>
+                    <div id="actions">
+                        <a class="close form_button sprited" id="cancel" href="#">Cancel</a>
+                        <a class="form_button sprited" id="log_in" href="#">Sign in</a>
+                    </div>
+                </div>
+                <h3 id="left_out" class="sprited">Feeling left out?</h3>
+                <span>Don't be sad, just <a href="#">click here</a> to sign up!</span>
+                <a id="close_x" class="close sprited" href="#">close</a>
+            </div>
 <div id="header_sub" class="clearfix">
   <div class="container clear">
     <div id="front_title">

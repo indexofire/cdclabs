@@ -2,18 +2,19 @@
 from django.db import models
 from django.template import RequestContext
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 from contrib.form_designer.models import Form
 
 
 class FormContent(models.Model):
     form = models.ForeignKey(Form, verbose_name=_('form'),
-                             related_name='%(app_label)s_%(class)s_related')
+        related_name='%(app_label)s_%(class)s_related',
+    )
     show_form_title = models.BooleanField(_('show form title'), default=True)
-    success_message = models.TextField(
-        _('success message'), blank=True, help_text=
-        _("Optional custom message to display after valid form is submitted"))
-
-    template = 'content/form/form.html'
+    success_message = models.TextField(_('success message'),
+        blank=True, help_text=_("Optional custom message to display after valid form is submitted"),
+    )
+    template = 'form/form.html'
 
     class Meta:
         abstract = True
@@ -41,6 +42,5 @@ class FormContent(models.Model):
         else:
             form_instance = form_class(prefix=prefix)
 
-        context = RequestContext(
-            request, {'content': self, 'form': form_instance})
+        context = RequestContext(request, {'content': self, 'form': form_instance})
         return render_to_string(self.template, context)

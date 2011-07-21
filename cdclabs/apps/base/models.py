@@ -8,7 +8,7 @@ from feincms.content.richtext.models import RichTextContent
 from feincms.content.image.models import ImageContent
 from contrib.content.googlemaps.models import GoogleMapsContent
 from contrib.content.markup.models import MarkupContent
-from contrib.form_designer.models import FormContent
+from contrib.content.form.models import FormContent
 
 
 # Register page extensions

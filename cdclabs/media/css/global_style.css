@@ -197,7 +197,7 @@ body {
 }
 #front_title div {
     color: #9C9C9C;
-    font-size:70%;
+    font-size: 75%;
     margin: 0px;
 }
 #user_panel {
@@ -613,10 +613,10 @@ div.border {
     margin: 40px 0px 20px 0px;
     border: 1px dashed #CECECE;
     padding: 1px;
-    
+
 }
 div.front {
-    background: url('/media/images/front.png') no-repeat 100% 0%;
+    background: url('/media/image/front.png') no-repeat 100% 0%;
     padding: 25px;
     margin: 0px;
 }
