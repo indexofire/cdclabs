@@ -8,7 +8,7 @@
     <table>
       {{ form }}
       <tr>
-        <td><div style="display:none"><input type="hidden" name="submitter" value="{{ request.user }}"></td>
+        <td><div style="display:none"><input type="hidden" name="submitter" value="{{ request.user }}"></div></td>
         <td>&nbsp;</td>
       </tr>
       <tr>
@@ -16,7 +16,7 @@
         <td><input type="submit" value="{% trans 'Submit' %}" /></td>
       </tr>
     </table>
-    <div style="display:none"><input type="hidden" name="submitter" value="{{ request.user }}">
+    <div style="display:none"><input type="hidden" name="submitter" value="{{ request.user }}"></div>
   </form>
   {% else %}
     {{ message|safe }}

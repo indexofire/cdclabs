@@ -4,7 +4,6 @@ from django import template
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.utils.hashcompat import md5_constructor
-
 from contrib.avatar.settings import (
     AVATAR_DEFAULT_URL,
     AVATAR_GRAVATAR_BACKUP,
@@ -41,5 +40,6 @@ register.simple_tag(avatar_url)
 def avatar(user, size=80):
     alt = unicode(user)
     url = avatar_url(user, size)
-    return """<img src="%s" alt="%s" width="%s" height="%s" />""" % (url, alt, size, size)
+    return """<img src="%s" alt="%s" width="%s" height="%s"
+        class="my_avatar" />""" % (url, alt, size, size)
 register.simple_tag(avatar)

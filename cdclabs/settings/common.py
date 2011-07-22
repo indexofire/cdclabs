@@ -90,7 +90,6 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'feincms',
     'feincms.module.page',
-    #'feincms_ext.content_type.highcharts',
     #'paging',
     #'indexer',
     'apps.base',
@@ -98,10 +97,10 @@ INSTALLED_APPS = (
     #'apps.forum',
     #'apps.attachment',
     'contrib.account',
-    #'apps.group',
-    #'apps.profile',
+    'contrib.avatar',
     'contrib.content.googlemaps',
     'contrib.content.markup',
+    'contrib.content.form',
     'contrib.form_designer',
 )
 

@@ -1,5 +1,5 @@
 {% load applicationcontent_tags feincms_tags feincms_page_tags %}
-{% load i18n %}
+{% load i18n avatar_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +29,7 @@ $(function() {function launch() {
 </script>
 </head>
 
-<body>
+<body style="background: #FEFEFE">
 <div id="header" class="clearfix">
   <div class="container clear">
     <div class="span-18">
@@ -41,29 +41,34 @@ $(function() {function launch() {
       </ol>
     </div>
     <div class="span-6 last">
+    {% if request.user.is_anonymous %}
       <ul id="user_panel">
-        <!--<li><a style="color:#EFEFEF" href="{% url auth_login %}" id="login">{% trans 'Login' %}</a></li>
-        <li><a style="color:#EFEFEF" href="{% url registration_register %}" id="register">{% trans 'Register' %}</a></li>-->
-        <li><a href="#" id="login">login</a></li>
+        <li><a href="#" id="login" style="color: #EFEFEF">登录</a></li>
+        <li><a href="#" id="register" style="color: #EFEFEF">注册</a></li>
       </ul>
+    {% else %}
+      <span style="color: #EEE">控制面板</span> | <span>{% avatar request.user 24 %}</span>
+    {% endif %}
     </div>
   </div>
 </div>
-<div id="sign_up" style="display: none">
-                <h3 id="see_id" class="sprited">Can I see some ID?</h3>
-                <span>Please sign in using the form below</span>
-                <div id="sign_up_form">
-                    <label><strong>Username:</strong> <input class="sprited"></label>
-                    <label><strong>Password:</strong> <input class="sprited"></label>
-                    <div id="actions">
-                        <a class="close form_button sprited" id="cancel" href="#">Cancel</a>
-                        <a class="form_button sprited" id="log_in" href="#">Sign in</a>
-                    </div>
-                </div>
-                <h3 id="left_out" class="sprited">Feeling left out?</h3>
-                <span>Don't be sad, just <a href="#">click here</a> to sign up!</span>
-                <a id="close_x" class="close sprited" href="#">close</a>
-            </div>
+
+<div id="sign_up" style="display: none; background: #EEEEEE; padding: 20px; border:2px sold #4a4a4a">
+  <h3 id="see_id" class="sprited">Can I see some ID?</h3>
+  <span>Please sign in using the form below</span>
+  <div id="sign_up_form">
+    <label><strong>Username:</strong><input class="sprited"></label>
+    <label><strong>Password:</strong><input class="sprited"></label>
+    <div id="actions">
+      <a class="close form_button sprited" id="cancel" href="#">Cancel</a>
+      <a class="form_button sprited" id="log_in" href="#">Sign in</a>
+    </div>
+  </div>
+  <h3 id="left_out" class="sprited">Feeling left out?</h3>
+  <span>Don't be sad, just <a href="#">click here</a> to sign up!</span>
+  <a id="close_x" class="close sprited" href="#">close</a>
+</div>
+
 <div id="header_sub" class="clearfix">
   <div class="container clear">
     <div id="front_title">
