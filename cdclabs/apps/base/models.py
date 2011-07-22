@@ -62,6 +62,14 @@ Page.register_templates(
             ('main', _('Main content area')),
         ),
     },
+    {
+        'key': 'underconstruction',
+        'title': _('Under Construction'),
+        'path': 'under_construction.html',
+        'regions': (
+            ('main', _('Main content area')),
+        ),
+    },
 )
 
 

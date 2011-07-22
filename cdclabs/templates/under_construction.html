@@ -1,0 +1,90 @@
+{% extends "site_base.html" %}
+{% load feincms_tags feincms_page_tags %}
+
+{% block extra_head %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/lwtCountdown/jquery.lwtCountdown-1.0.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/lwtCountdown/miscs.js"></script>
+<style>
+#countdown_dashboard {
+    margin: 50px auto 250px;
+    width: 750px;
+    position: relative;
+    overflow: hidden;
+}
+.dash {
+    float: left;
+    height: 150px;
+    margin: 0 30px 0 0;
+    position: relative;
+    display: inline;
+    width: 120px;
+}
+.dash span {
+    bottom: 0;
+    display: block;
+    left: 0;
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+}
+.dash .digit {
+    float: left;
+    font-size: 9em;
+    position: relative;
+    width: 60px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<script>
+jQuery(document).ready(function() {
+    $('#countdown_dashboard').countDown({
+        targetDate: {
+            'day':      15,
+            'month':    10,
+            'year':     2011,
+            'hour':     18,
+            'min':      0,
+            'sec':      0
+        }
+    });
+});
+</script>
+<h1 style="margin-top:80px;font-size:3em;text-align: center">UNDER CONSTRUNCTION! <br/><br/>WILL BE ONLINE:</h1>
+<div id="countdown_dashboard">
+  <div class="dash weeks_dash">
+    <span>weeks</span>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+  </div>
+
+  <div class="dash days_dash">
+    <span>days</span>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+  </div>
+
+  <div class="dash hours_dash">
+    <span>hours</span>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+  </div>
+
+  <div class="dash minutes_dash">
+    <span>minutes</span>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+  </div>
+
+  <div class="dash seconds_dash">
+    <span>seconds</span>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+    <div class="digit"><div class="top"></div><div class="bottom"></div></div>
+  </div>
+</div>
+{% feincms_render_region feincms_page "main" request %}
+{% endblock %}
