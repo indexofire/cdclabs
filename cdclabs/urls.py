@@ -14,8 +14,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^favicon\.ico/$', redirect_to, {'url': '/media/favicon.ico'}),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^account/', include('account.urls')),
+    url(r'^account/', include('contrib.account.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^profile/', include('contrib.profile.urls')),
 )
 
 urlpatterns += patterns('',

@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     #'apps.attachment',
     'contrib.account',
     'contrib.avatar',
+    'contrib.profile',
     'contrib.content.googlemaps',
     'contrib.content.markup',
     'contrib.content.form',
@@ -144,6 +145,7 @@ TEMPLATE_DIRS = (
     join(PROJECT_PATH, 'templates'),
 )
 
+LOGIN_REDIRECT_URL = "/"
 MARKUP_CODE_HIGHTLIGHT = True
 
 from contrib.account.settings import *

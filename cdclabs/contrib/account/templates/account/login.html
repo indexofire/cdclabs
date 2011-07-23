@@ -5,7 +5,7 @@
 
 {% block content %}
 <h1>{% trans "Authorization" %}</h1>
-<p>{% trans "You should login to gain access to all site features. If you have not account" %} <a href="{% url registration_register %}">{% trans "register" %}</a>{% trans " please." %}</p>
+
 <form class="login-form" method="post">{% csrf_token %}
   <div class="wide">{{ form.as_table }}</div>
   <div><input type="submit" value="{% trans 'login' %}" /></div>

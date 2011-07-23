@@ -37,15 +37,15 @@ class Profile(models.Model):
 
     @property
     def age(self):
-		today = datetime.date.today()
-		try:
-			birth = self.birth_date.replace(year=today.year)
-		except ValueError:
-			birth = self.birth_date.replace(year=today.year, day=self.birth_date.day-1)
-		if birth > today:
-			return today.year - self.birth_date.year - 1
-		else:
-			return today.year - self.birth_date.year
+        today = datetime.date.today()
+        try:
+            birth = self.birth_date.replace(year=today.year)
+        except ValueError:
+            birth = self.birth_date.replace(year=today.year, day=self.birth_date.day-1)
+        if birth > today:
+            return today.year - self.birth_date.year - 1
+        else:
+            return today.year - self.birth_date.year
 
     @permalink
     def get_absolute_url(self):

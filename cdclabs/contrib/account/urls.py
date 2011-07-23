@@ -19,22 +19,15 @@ Urls overview in form "url name: short description":
  * auth_email_change_done: the page after success email change
 """
 
-urlpatterns = patterns('account.views',
-    # Log in, log out
+urlpatterns = patterns('contrib.account.views',
     url(r'^login/$', 'login', name='auth_login'),
     url(r'^logout/$', 'logout', name='auth_logout'),
-    url(r'^logout/successful/$', 'logout_successful',
-        name='auth_logout_successful'),
+    url(r'^logout/successful/$', 'logout_successful', name='auth_logout_successful'),
 
     # Registration
-    url(r'^registration/$', 'registration',
-        name='registration_register'),
-    url(r'^activation/required/$', direct_to_template,
-        {'template':'account/activation_required.html'},
-        name='activation_required'),
-    url(r'^registration/complete/$', direct_to_template,
-        {'template':'account/registration_complete.html'},
-        name='registration_complete'),
+    #url(r'^registration/$', 'registration', name='registration_register'),
+    #url(r'^activation/required/$', direct_to_template, {'template':'account/activation_required.html'}, name='activation_required'),
+    #url(r'^registration/complete/$', direct_to_template, {'template':'account/registration_complete.html'}, name='registration_complete'),
 
     # Password management
     url(r'^password/reset/$', 'password_reset',

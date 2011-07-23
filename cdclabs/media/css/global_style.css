@@ -165,7 +165,7 @@ body {
 #top_menu a.active:hover {
     border-top-color: #DD4B39;
 }
-#control_panel {
+#user_panel {
     float: right;
     list-style: none;
     font-size: 1em;
@@ -174,11 +174,25 @@ body {
     margin: 0px;
     display: inline;
 }
-#control_panel a {
+#user_panel li {
+    float: left;
+    font-weight: bold;
+}
+#user_panel a {
     margin: 0px 1px;
-    padding: 6px 10px;
+    padding: 6px 10px 7px 10px;
     color: #CCC;
     border-top: 2px solid #2D2D2D;
+}
+#user_panel a:hover {
+    background: #9C9D9E;
+    text-decoration: none;
+    border-top: 2px solid #DD4B39;
+}
+#user_panel .my_avatar {
+    width: 24px;
+    height: 24px;
+    margin: 3px;
 }
 #header_sub {
     background: #F1F1F1;
@@ -199,26 +213,6 @@ body {
     color: #9C9C9C;
     font-size: 75%;
     margin: 0px;
-}
-#user_panel {
-    float: right;
-    color: #FFF;
-}
-#user_panel a {
-    margin: 1px 4px;
-    padding: 3px 6px;
-    font-weight: bold;
-}
-#user_panel a:hover {
-    background: #9C9D9E;
-    text-decoration: none;
-}
-#user_panel a.signin span {
-    background: url(../img/toggle_down_light.png) no-repeat 100% 50%;
-    padding:4px 16px 6px 0;
-}
-#user_panel a.menu-open span {
-    background: url(../img/toggle_up_dark.png) no-repeat 100% 50%;
 }
 #signin_menu {
     display:none;
