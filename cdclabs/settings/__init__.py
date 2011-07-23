@@ -8,8 +8,7 @@ from django.utils.importlib import import_module
 CURRENT_HOST = socket.gethostname()
 HOST_MAP = {
     'development': 'mark-desktop',
-    'production': '',
-    'other_settings': '',
+    'production': 'hzcdclabs.org',
 }
 DISPATCHER = []
 

@@ -173,8 +173,7 @@ class FormField(models.Model):
 
 class FormSubmission(models.Model):
     submitted = models.DateTimeField(auto_now_add=True)
-    form = models.ForeignKey(
-        Form, verbose_name=_('form'), related_name='submissions')
+    form = models.ForeignKey(Form, verbose_name=_('form'), related_name='submissions')
     data = models.TextField()
     path = models.CharField(max_length=255)
 
@@ -188,7 +187,6 @@ class FormSubmission(models.Model):
         'datetime', or 'path' to include additional meta data.
         """
         data_dict = eval(self.data)
-        print data_dict
         data = SortedDict()
         field_names = []
         for field in self.form.fields.all():
