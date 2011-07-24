@@ -5,7 +5,7 @@
   {% if feincms_page.auth and request.user.is_anonymous %}
   <script language="JavaScript">self.location='{% url auth_login %}';</script>
   {% else %}
-  <div class="span-8 last">
+  <div class="span-5">
   {% feincms_navigation of feincms_page as sublevel level=2 %}
   {% if sublevel %}
     {% for p in sublevel %}
@@ -22,7 +22,7 @@
     {% endif %}
   {% feincms_render_region feincms_page "right" request %}
   </div>
-  <div class="span-16">
+  <div class="span-19 last">
   {% feincms_render_region feincms_page "main" request %}
   </div>
   {% endif %}

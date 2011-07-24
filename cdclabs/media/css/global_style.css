@@ -124,7 +124,7 @@ body {
     text-decoration: none;
 }
 #header_sub {
-    margin: 0px;
+    margin: 0px 0px 30px 0px;
 }
 /* top */
 #site_name {
@@ -614,3 +614,4 @@ div.front {
     padding: 25px;
     margin: 0px;
 }
+

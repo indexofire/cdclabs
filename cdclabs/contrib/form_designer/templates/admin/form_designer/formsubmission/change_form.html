@@ -1,5 +1,30 @@
 {% extends "admin/change_form.html" %}
 
+{% block extrahead %}
+<style type="text/css">
+div.form_submission {
+    padding: 10px;
+    border: 1px solid #CCC;
+    margin-bottom: 10px;
+    display: block;
+}
+div.form_submission table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    
+}
+div.form_submission th {
+    text-align: center;
+    width: 40%;
+}
+div.form_submission td {
+    text-align: left;
+    width: 50%;
+}
+</style>
+{% endblock %}
+
 {% block after_related_objects %}
-<div style="padding: 10px; border: 1px solid #CCC">{{ original.formatted_data_html|safe }}</div>
+<div class="form_submission">{{ original.formatted_data_html|safe }}</div>
 {% endblock %}

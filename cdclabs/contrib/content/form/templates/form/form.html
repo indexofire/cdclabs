@@ -1,10 +1,15 @@
 {% load i18n %}
+<style>
+th label {
+    font-size: 1.5em;
+}
+</style>
 <div id="form{{ content.id }}">
   {% if content.show_form_title %}
     <h2>{{ content.form.title }}</h2>
   {% endif %}
   {% if form %}
-  <form method="post" action="#form{{ content.id }}">{% csrf_token %}
+  <form method="post" action="#form{{ content.id }}" class="jqtransform">{% csrf_token %}
     <table>
       {{ form }}
       <tr>
@@ -13,12 +18,20 @@
       </tr>
       <tr>
         <td>&nbsp;</td>
-        <td><input type="submit" value="{% trans 'Submit' %}" /></td>
+        <td>
+          <input type="submit" value="提交">
+          <!--<input type="submit" value="{% trans 'Submit' %}" />-->
+        </td>
       </tr>
     </table>
-    <div style="display:none"><input type="hidden" name="submitter" value="{{ request.user }}"></div>
   </form>
   {% else %}
     {{ message|safe }}
   {% endif %}
 </div>
+<script type="text/javascript">
+$(function() {
+    //find all form with class jqtransform and apply the plugin
+    $("form.jqtransform").jqTransform();
+});
+</script>

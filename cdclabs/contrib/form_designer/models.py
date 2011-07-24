@@ -210,10 +210,10 @@ class FormSubmission(models.Model):
         formatted = ""
         for key, value in self.sorted_data().items():
             if html:
-                formatted += "<dt>%s</dt><dd>%s</dd>\n" % (key, value)
+                formatted += "<tr><th>%s</th><td>%s</td></tr>\n" % (key, value)
             else:
                 formatted += "%s: %s\n" % (key, value)
-        return formatted if not html else "<dl>%s</dl>" % formatted
+        return formatted if not html else "<table>%s</table>" % formatted
 
     def formatted_data_html(self):
         return self.formatted_data(html=True)
