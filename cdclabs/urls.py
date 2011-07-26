@@ -17,8 +17,8 @@ urlpatterns = patterns('',
     url(r'^account/', include('contrib.account.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^profile/', include('contrib.profile.urls')),
-    url(r'^$', 'feincms.views.base.handler', name='feincms_home'),
-    url(r'^(.*)/$', 'feincms.views.base.handler', name='feincms_handler'),
+    #url(r'^$', 'feincms.views.base.handler', name='feincms_home'),
+    #url(r'^(.*)/$', 'feincms.views.base.handler', name='feincms_handler'),
 )
 
 urlpatterns += patterns('',

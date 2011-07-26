@@ -1,5 +1,4 @@
-{% load applicationcontent_tags feincms_tags feincms_page_tags %}
-{% load i18n avatar_tags %}
+{% load i18n avatar_tags applicationcontent_tags feincms_tags feincms_page_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
   <title>{% block title %}{{ feincms_page.title }}{% endblock title %}</title>
   {% block meta %}{% endblock meta %}
   <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/global_style.css" />
-  <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/js/jqtransformplugin/jqtransform.css" />
+  <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}js/jqtransformplugin/jqtransform.css" />
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script type="text/javascript" src="{{ MEDIA_URL }}js/lightbox_me/jquery.lightbox_me.js"></script>
   <script type="text/javascript" src="{{ MEDIA_URL }}js/jqtransformplugin/jquery.jqtransform.js"></script>
@@ -29,7 +28,8 @@ $(function() {function launch() {
 </script>
 </head>
 
-<body style="background: #FEFEFE">
+<body>
+    
 <div id="header" class="clearfix">
   <div class="container clear">
     <div class="span-18">
@@ -78,9 +78,6 @@ $(function() {function launch() {
     </div>
     </div>
     <div class="span-18 last">
-      <form method="post" action="#">{% csrf_token %}
-      <input type="text">
-      </form>
     </div>
   </div>
 </div>
