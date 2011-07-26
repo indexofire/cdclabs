@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.utils.translation import ugettext_lazy as _
 
+
 ACCOUNT_USER_MODEL = 'django.contrib.auth.models.User'
 ACCOUNT_LOGIN_FORM = 'account.forms.LoginForm'
 

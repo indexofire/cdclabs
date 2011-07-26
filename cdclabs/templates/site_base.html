@@ -46,7 +46,7 @@ $(function() {function launch() {
         <li><a href="#" id="login" style="color: #EFEFEF">登录</a></li>
       {% else %}
         <li>{% avatar request.user %}</li>
-        <li><a href="{% url profile_detail request.user %}">控制面板</a></li>
+        <li><a href="{% url profile_detail request.user %}">{{ request.user.first_name }}{{ request.user.last_name }}</a></li>
         <li><a href="{% url auth_logout %}">退出登录</a></li>
       {% endif %}
       </ul>
@@ -71,9 +71,16 @@ $(function() {function launch() {
 
 <div id="header_sub" class="clearfix">
   <div class="container clear">
+    <div class="span-6">
     <div id="front_title">
       <h1>HZCDC * Labs</h1>
       <div>杭州市疾病预防控制中心实验室</div>
+    </div>
+    </div>
+    <div class="span-18 last">
+      <form method="post" action="#">{% csrf_token %}
+      <input type="text">
+      </form>
     </div>
   </div>
 </div>

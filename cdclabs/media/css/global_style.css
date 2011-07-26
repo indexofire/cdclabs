@@ -614,4 +614,14 @@ div.front {
     padding: 25px;
     margin: 0px;
 }
-
+li.nav_item {
+    background: url('/media/image/nav_circle.png') no-repeat 0% 100%;
+}
+li.nav_item a {
+    margin-left: 20px;
+    padding: 5px;
+}
+li.nav_item a:hover {
+    background: #EEE;
+    text-decoration: none;
+}

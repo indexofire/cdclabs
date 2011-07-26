@@ -12,14 +12,14 @@ from urlauth.util import wrap_url
 from contrib.account import signals
 from contrib.account.forms import (
     PasswordResetForm,
-    PasswordChangeForm, 
-    LoginForm, 
+    PasswordChangeForm,
+    LoginForm,
     EmailChangeForm
 )
 from contrib.account.util import (
-    email_template, 
-    build_redirect_url, 
-    render_to, 
+    email_template,
+    build_redirect_url,
+    render_to,
     load_class,
 )
 
@@ -37,9 +37,7 @@ def message(request, msg):
     """
     Shortcut that prepare data for message view.
     """
-
-    return {'message': msg,
-            }
+    return {'message': msg,}
 
 
 @render_to('account/registration.html')

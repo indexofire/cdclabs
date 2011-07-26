@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     url(r'^account/', include('contrib.account.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^profile/', include('contrib.profile.urls')),
+    url(r'^$', 'feincms.views.base.handler', name='feincms_home'),
+    url(r'^(.*)/$', 'feincms.views.base.handler', name='feincms_handler'),
 )
 
 urlpatterns += patterns('',
@@ -25,7 +27,7 @@ urlpatterns += patterns('',
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-	    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', 
-	        {'document_root': settings.MEDIA_ROOT},
-	    ),
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT},
+        ),
     )

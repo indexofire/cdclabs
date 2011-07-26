@@ -1,4 +1,4 @@
-{% extends "profile/base_profile.html" %}
+{% extends "profile/base.html" %}
 
 {% block title %}Profile for {{ object.user.get_full_name }}{% endblock %}
 
@@ -6,7 +6,7 @@
 <h2 id="user_name">{{ object.user.get_full_name }}
     <em id="user_city">{{ object.city }}, {{ object.state }}</em></h2>
 <h3 id="user_age_and_gender">{{ object.get_gender_display }}{% if object.age %}, {{ object.age }}{% endif %}</h3>
-  
+
   {% if object.user.service_set.all %}
   <h3 class="list_title">Services</h3>
   <ul class="link_list">
@@ -15,7 +15,7 @@
     {% endfor %}
   </ul>
   {% endif %}
-  
+
   {% if object.user.link_set.all %}
   <h3 class="list_title">Links</h3>
   <ul class="link_list">
