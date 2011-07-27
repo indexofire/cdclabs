@@ -90,6 +90,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'feincms',
     'feincms.module.page',
+    'feincms.module.medialibrary',
     #'paging',
     #'indexer',
     'apps.base',

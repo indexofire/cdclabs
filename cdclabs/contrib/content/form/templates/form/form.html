@@ -3,10 +3,16 @@
 th label {
     font-size: 1.5em;
 }
+h2.form_title {
+    text-align: center;
+}
+table tr {
+    margin-bottom: 1em;
+}
 </style>
 <div id="form{{ content.id }}">
   {% if content.show_form_title %}
-    <h2>{{ content.form.title }}</h2>
+    <h2 class="form_title">{{ content.form.title }}</h2>
   {% endif %}
   {% if form %}
 
