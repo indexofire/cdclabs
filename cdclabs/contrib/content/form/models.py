@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from contrib.form_designer.models import Form
-
+from django.forms.formsets import formset_factory
 
 class FormContent(models.Model):
     form = models.ForeignKey(Form, verbose_name=_('form'),
@@ -14,6 +14,7 @@ class FormContent(models.Model):
     success_message = models.TextField(_('success message'),
         blank=True, help_text=_("Optional custom message to display after valid form is submitted"),
     )
+    #is_perm = models.BooleanField(_('is submit once'), default=False)
     template = 'form/form.html'
 
     class Meta:
@@ -24,14 +25,14 @@ class FormContent(models.Model):
     def process_valid_form(self, request, form_instance, **kwargs):
         """ Process form and return response (hook method). """
         process_result = self.form.process(form_instance, request)
-        context = RequestContext(
-            request, {
-                'content': self,
-                'message': self.success_message or process_result or u''})
+        context = RequestContext(request, {
+            'content': self,
+            'message': self.success_message or process_result or u'',
+            })
         return render_to_string(self.template, context)
 
     def render(self, request, **kwargs):
-        form_class = self.form.form()
+        form_class = self.form.form(request)
         prefix = 'fc%d' % self.id
 
         if request.method == 'POST':
@@ -40,7 +41,12 @@ class FormContent(models.Model):
             if form_instance.is_valid():
                 return self.process_valid_form(request, form_instance, **kwargs)
         else:
+            #if form_class.submitter == request.user:
+            #    return render_to_string(self.template, RequestContext(request, {'text': 'dont'}))
             form_instance = form_class(prefix=prefix)
 
-        context = RequestContext(request, {'content': self, 'form': form_instance})
+        context = RequestContext(request, {
+            'content': self,
+            'form': form_instance,
+            })
         return render_to_string(self.template, context)

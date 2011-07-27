@@ -9,15 +9,12 @@ th label {
     <h2>{{ content.form.title }}</h2>
   {% endif %}
   {% if form %}
+
   <form method="post" action="#form{{ content.id }}" class="jqtransform">{% csrf_token %}
     <table>
       {{ form }}
       <tr>
-        <td><div style="display:none"><input type="hidden" name="submitter" value="{{ request.user }}"></div></td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
+        <td></td>
         <td>
           <input type="submit" value="提交">
           <!--<input type="submit" value="{% trans 'Submit' %}" />-->
