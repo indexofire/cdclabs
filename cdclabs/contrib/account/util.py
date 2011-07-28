@@ -76,26 +76,6 @@ def email_template(rcpt, template_path, **kwargs):
     return bool(msg.send(fail_silently=True))
 
 
-def render_to(template_path):
-    """
-    Decorate the django view.
-
-    Wrap view that return dict of variables, that should be used for
-    rendering the template.
-    """
-
-    def decorator(func):
-        def wrapper(request, *args, **kwargs):
-            output = func(request, *args, **kwargs)
-            if not isinstance(output, dict):
-                return output
-            ctx = RequestContext(request)
-            return render_to_response(template_path, output,
-                                      context_instance=ctx)
-        return wrapper
-    return decorator
-
-
 def load_class(path):
     from django.db.models.loading import get_app
     module_path, class_name = path.rsplit('.', 1)

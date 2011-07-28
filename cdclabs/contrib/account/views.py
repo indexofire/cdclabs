@@ -19,10 +19,9 @@ from contrib.account.forms import (
 from contrib.account.util import (
     email_template,
     build_redirect_url,
-    render_to,
     load_class,
 )
-
+from utils.views.helper import render_to
 
 RegistrationForm = load_class(settings.ACCOUNT_REGISTRATION_FORM)
 LoginForm = load_class(settings.ACCOUNT_LOGIN_FORM)
@@ -75,8 +74,7 @@ def registration(request, form_class=RegistrationForm):
             email_template(user.email, 'account/mail/registration_complete', **args)
             return redirect(reverse(settings.ACCOUNT_REGISTRATION_REDIRECT_URLNAME))
 
-    return {'form': form,
-            }
+    return {'form': form,}
 
 
 @render_to('account/password_reset.html')
@@ -97,8 +95,7 @@ def password_reset(request, form_class=PasswordResetForm):
         else:
             return message(request, _('Unfortunately we could not send you email in current time. Please, try later'))
 
-    return {'form': form,
-            }
+    return {'form': form,}
 
 
 @render_to('account/login.html')
