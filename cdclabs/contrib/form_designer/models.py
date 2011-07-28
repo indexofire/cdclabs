@@ -100,7 +100,7 @@ class FormField(models.Model):
         ('radio', _('radio'),
          curry(forms.ChoiceField, widget=forms.RadioSelect)),
         ('multiple-select', _('multiple select'), forms.MultipleChoiceField),
-        ('hidden', _('hidden'), curry(forms.CharField,)),
+        ('hidden', _('hidden'), curry(forms.CharField, widget=forms.widgets.HiddenInput)),
     ]
 
     form = models.ForeignKey(Form, related_name='fields',
