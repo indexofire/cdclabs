@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2 id="user_name">{{ object.user.get_full_name }}
-    <em id="user_city">{{ object.city }}, {{ object.state }}</em></h2>
+<em id="user_city">{{ object.city }}, {{ object.state }}</em></h2>
 <h3 id="user_age_and_gender">{{ object.get_gender_display }}{% if object.age %}, {{ object.age }}{% endif %}</h3>
 
   {% if object.user.service_set.all %}
@@ -24,4 +24,6 @@
     {% endfor %}
   </ul>
   {% endif %}
+
+  <h3><a href="{% url auth_password_change %}">修改密码</a></h3>
 {% endblock %}

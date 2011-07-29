@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import csv
+import cStringIO
+import codecs
 from threading import currentThread
-
 from django import forms
 from django.contrib import admin
 from django.shortcuts import get_object_or_404
@@ -10,11 +12,8 @@ from django.db.models import Model
 from django.utils import simplejson
 from django.utils.text import truncate_words
 from django.utils.translation import ugettext_lazy as _
-
 from . import models
 
-import cStringIO
-import codecs
 
 class UnicodeWriter:
     """
