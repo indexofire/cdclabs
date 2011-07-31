@@ -56,13 +56,13 @@ class Form(models.Model):
     def __unicode__(self):
         return self.title
 
-    def form(self, request):
+    def form(self):
         fields = SortedDict((
             ('required_css_class', 'required'),
             ('error_css_class', 'error'),
             ))
 
-        fields.setdefault('submitter', request.user)
+        #fields.setdefault('submitter', user)
 
         for field in self.fields.all():
             field.add_formfield(fields, self)
@@ -94,13 +94,14 @@ class FormField(models.Model):
         ('text', _('text'), forms.CharField),
         ('email', _('e-mail address'), forms.EmailField),
         ('longtext', _('long text'),
-         curry(forms.CharField, widget=forms.Textarea)),
+            curry(forms.CharField, widget=forms.Textarea)),
         ('checkbox', _('checkbox'), curry(forms.BooleanField, required=False)),
         ('select', _('select'), curry(forms.ChoiceField, required=False)),
         ('radio', _('radio'),
-         curry(forms.ChoiceField, widget=forms.RadioSelect)),
+            curry(forms.ChoiceField, widget=forms.RadioSelect)),
         ('multiple-select', _('multiple select'), forms.MultipleChoiceField),
-        ('hidden', _('hidden'), curry(forms.CharField, widget=forms.widgets.HiddenInput)),
+        ('hidden', _('hidden'), curry(forms.CharField,
+            widget=forms.widgets.HiddenInput)),
     ]
 
     form = models.ForeignKey(Form, related_name='fields',
@@ -163,7 +164,7 @@ class FormField(models.Model):
         fields[self.name] = self.formfield()
 
     def formfield(self):
-        kwargs = dict(label=self.title, required=self.is_required)
+        kwargs = dict(label=self.title, required=self.is_required, initial=self.default_value)
         if self.choices:
             kwargs['choices'] = self.get_choices()
         if self.help_text:

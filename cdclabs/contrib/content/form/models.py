@@ -3,8 +3,9 @@ from django.db import models
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
-from contrib.form_designer.models import Form
-from django.forms.formsets import formset_factory
+#from django.forms.formsets import formset_factory
+from contrib.form_designer.models import Form, FormSubmission
+
 
 class FormContent(models.Model):
     form = models.ForeignKey(Form, verbose_name=_('form'),
@@ -32,7 +33,8 @@ class FormContent(models.Model):
         return render_to_string(self.template, context)
 
     def render(self, request, **kwargs):
-        form_class = self.form.form(request)
+        form_submission = FormSubmission.objects.get(data['submitter']=request.user)
+        form_class = self.form.form()
         prefix = 'fc%d' % self.id
 
         if request.method == 'POST':

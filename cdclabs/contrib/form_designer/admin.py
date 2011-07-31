@@ -180,8 +180,7 @@ class FormAdmin(admin.ModelAdmin):
         return response
 
     def get_urls(self):
-        return patterns(
-            '',
+        return patterns('',
             url(r'(?P<form_id>\d+)/export_submissions/',
                 self.admin_site.admin_view(self.export_submissions))
             ) + super(FormAdmin, self).get_urls()

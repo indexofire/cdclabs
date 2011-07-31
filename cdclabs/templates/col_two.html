@@ -1,6 +1,12 @@
 {% extends "site_base.html" %}
 {% load applicationcontent_tags feincms_tags feincms_page_tags %}
-
+{% block extra_head %}
+<script>
+$(function() {
+    $('#id_fc2-submitter').val('{{ request.user }}');
+});
+</script>
+{% endblock%}
 {% block content %}
   {% if feincms_page.auth and request.user.is_anonymous %}
   <script language="JavaScript">self.location='{% url auth_login %}';</script>
