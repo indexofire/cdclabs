@@ -33,7 +33,14 @@ class FormContent(models.Model):
         return render_to_string(self.template, context)
 
     def render(self, request, **kwargs):
-        form_submission = FormSubmission.objects.get(data['submitter']=request.user)
+        qs = FormSubmission.objects.get(path=request.path)
+        print qs.data
+        if qs.data['submitter'] == request.user:
+            context = RequestContext(request, {
+            'content': self,
+            'form': None,
+            })
+            return render_to_string(self.template, context)
         form_class = self.form.form()
         prefix = 'fc%d' % self.id
 
