@@ -34,11 +34,10 @@ class FormContent(models.Model):
 
     def render(self, request, **kwargs):
         qs = FormSubmission.objects.get(path=request.path)
-        print qs.data
-        if qs.data['submitter'] == request.user:
+        if qs.sorted_data()['submitter'] == str(request.user):
             context = RequestContext(request, {
             'content': self,
-            'form': None,
+            'form': 'you have finished the form',
             })
             return render_to_string(self.template, context)
         form_class = self.form.form()
