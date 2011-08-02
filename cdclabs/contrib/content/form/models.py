@@ -3,6 +3,7 @@ from django.db import models
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import get_object_or_404
 #from django.forms.formsets import formset_factory
 from contrib.form_designer.models import Form, FormSubmission
 
@@ -24,7 +25,9 @@ class FormContent(models.Model):
         verbose_name_plural = _('form contents')
 
     def process_valid_form(self, request, form_instance, **kwargs):
-        """ Process form and return response (hook method). """
+        """
+        Process form and return response (hook method).
+        """
         process_result = self.form.process(form_instance, request)
         context = RequestContext(request, {
             'content': self,
@@ -33,28 +36,60 @@ class FormContent(models.Model):
         return render_to_string(self.template, context)
 
     def render(self, request, **kwargs):
-        qs = FormSubmission.objects.get(path=request.path)
-        if qs.sorted_data()['submitter'] == str(request.user):
-            context = RequestContext(request, {
-            'content': self,
-            'form': 'you have finished the form',
-            })
-            return render_to_string(self.template, context)
+        """
+        Process form content block render
+        """
         form_class = self.form.form()
         prefix = 'fc%d' % self.id
 
         if request.method == 'POST':
             form_instance = form_class(request.POST, prefix=prefix)
-
             if form_instance.is_valid():
-                return self.process_valid_form(request, form_instance, **kwargs)
+                return self.process_valid_form(request, form_instance,
+                    **kwargs)
         else:
-            #if form_class.submitter == request.user:
-            #    return render_to_string(self.template, RequestContext(request, {'text': 'dont'}))
             form_instance = form_class(prefix=prefix)
+            try:
+                form_submission_object = FormSubmission.objects.get(
+                    path=request.path)
+                if form_submission_object.sorted_data()['submitter'] == str(request.user):
+                    context = RequestContext(request, {
+                        'content': self,
+                        'form': '你已提交结果数据，如果需要修改请联系杭州疾控中心-汪皓秋',
+                        'is_submitter': False,
+                        })
+                    return render_to_string(self.template, context)
+                else:
+                    context = RequestContext(request, {
+                        'content': self,
+                        'form': form_instance,
+                        })
+                    return render_to_string(self.template, context)
+            except:
+                context = RequestContext(request, {
+                    'content': self,
+                    'form': form_instance,
+                    })
+                return render_to_string(self.template, context)
 
-        context = RequestContext(request, {
-            'content': self,
-            'form': form_instance,
-            })
-        return render_to_string(self.template, context)
+        #fs_object = get_object_or_404(FormSubmission, path=request.path)
+        #if fs_object.sorted_data()['submitter'] == str(request.user):
+        #    context = RequestContext(request, {
+        #    'content': self,
+        #    'form': 'you have finished the form',
+        #    })
+        #    return render_to_string(self.template, context)
+        #form_class = self.form.form()
+        #prefix = 'fc%d' % self.id
+
+        #if request.method == 'POST':
+        #    form_instance = form_class(request.POST, prefix=prefix)
+        #    if form_instance.is_valid():
+        #        return self.process_valid_form(request, form_instance, **kwargs)
+        #else:
+        #    form_instance = form_class(prefix=prefix)
+        #context = RequestContext(request, {
+        #    'content': self,
+        #    'form': form_instance,
+        #    })
+        #return render_to_string(self.template, context)

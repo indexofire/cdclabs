@@ -108,7 +108,7 @@ class FormField(models.Model):
         verbose_name=_('form'))
     ordering = models.IntegerField(_('ordering'), default=0)
 
-    title = models.CharField(_('title'), max_length=100, unique=True)
+    title = models.CharField(_('title'), max_length=100)
     name = models.CharField(_('name'), max_length=100)
     type = models.CharField(
         _('type'),

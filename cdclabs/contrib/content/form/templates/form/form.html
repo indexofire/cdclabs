@@ -19,6 +19,7 @@ table tr {
   <form method="post" action="#form{{ content.id }}" class="jqtransform">{% csrf_token %}
     <table>
       {{ form }}
+      {% if is_submitter %}
       <tr>
         <td></td>
         <td>
@@ -26,6 +27,7 @@ table tr {
           <!--<input type="submit" value="{% trans 'Submit' %}" />-->
         </td>
       </tr>
+      {% endif %}
     </table>
   </form>
   {% else %}
