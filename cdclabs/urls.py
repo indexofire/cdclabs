@@ -7,9 +7,11 @@ from django.conf.urls.defaults import (
 )
 from django.contrib import admin
 from django.views.generic.simple import redirect_to
+from feincms.module.page.sitemap import PageSitemap
 
 
 admin.autodiscover()
+sitemaps = {'pages' : PageSitemap}
 
 urlpatterns = patterns('',
     url(r'^favicon\.ico/$', redirect_to, {'url': '/media/favicon.ico'}),
@@ -19,6 +21,12 @@ urlpatterns = patterns('',
     url(r'^profile/', include('contrib.profile.urls')),
     #url(r'^$', 'feincms.views.base.handler', name='feincms_home'),
     #url(r'^(.*)/$', 'feincms.views.base.handler', name='feincms_handler'),
+)
+
+urlpatterns += patterns('',
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+        {'sitemaps': sitemaps},
+    ),
 )
 
 urlpatterns += patterns('',

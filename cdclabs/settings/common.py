@@ -149,4 +149,9 @@ TEMPLATE_DIRS = (
 LOGIN_REDIRECT_URL ='/'
 MARKUP_CODE_HIGHTLIGHT = True
 
+# FeinCMS Settings
+FEINCMS_RICHTEXT_INIT_CONTEXT = {
+    'TINYMCE_JS_URL': '%sjs/tiny_mce/tiny_mce.js' % MEDIA_URL,
+}
+
 from contrib.account.settings import *
