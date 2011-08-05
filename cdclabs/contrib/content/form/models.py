@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+from django import forms
 from django.db import models
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import get_object_or_404
-#from django.forms.formsets import formset_factory
 from contrib.form_designer.models import Form, FormSubmission
 
 
@@ -23,6 +23,13 @@ class FormContent(models.Model):
         abstract = True
         verbose_name = _('form content')
         verbose_name_plural = _('form contents')
+
+    @property
+    def media(self):
+        return forms.Media(
+            css={'all': ('js/jqtransformplugin/jqtransform.css',)},
+            js=('js/jqtransformplugin/jquery.jqtransform.js',)
+            )
 
     def process_valid_form(self, request, form_instance, **kwargs):
         """

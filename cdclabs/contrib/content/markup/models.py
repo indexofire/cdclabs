@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django import forms
 from django.db import models
 from django.conf import settings
 from django.template import TemplateSyntaxError, RequestContext
@@ -19,14 +20,12 @@ def restructuredtext(value):
         from contrib.content.markup.directives.code import CodeHighlight
     except ImportError:
         if settings.DEBUG:
-            raise TemplateSyntaxError("Error in content type: The Python "
-                "docutils library isn't installed.")
+            raise TemplateSyntaxError("Error in content type: The python docutils library isn't installed.")
         return force_unicode(value)
-    else:
-        docutils_settings = getattr(settings,
-            'RESTRUCTUREDTEXT_FILTER_SETTINGS', {},)
+    finally:
         if settings.MARKUP_CODE_HIGHTLIGHT:
             directives.register_directive('code', CodeHighlight)
+        docutils_settings = getattr(settings, 'RESTRUCTUREDTEXT_FILTER_SETTINGS', {},)
         parts = publish_parts(source=smart_str(value), writer_name="html4css1",
             settings_overrides=docutils_settings,)
         return mark_safe(force_unicode(parts["html_body"]))
@@ -53,16 +52,14 @@ def markdown(value):
         import markdown
     except ImportError:
         if settings.DEBUG:
-            raise TemplateSyntaxError("Error in content type: The "
-                "Markdown library isn't installed.")
+            raise TemplateSyntaxError("Error in content type: The python markdown library isn't installed.")
         return force_unicode(value)
-    else:
+    finally:
         def parse_extra(extra):
             if ':' not in extra:
                 return (extra, {})
             name, values = extra.split(':', 1)
-            values = dict((str(val.strip()), True) for val in \
-                values.split('|'))
+            values = dict((str(val.strip()), True) for val in values.split('|'))
             return (name.strip(), values)
         extensions = ['']
         if settings.MARKUP_CODE_HIGHTLIGHT:
@@ -76,6 +73,7 @@ def markdown(value):
         #    safe_mode = False
         return mark_safe(markdown.markdown(force_unicode(value), extensions))
 
+
 def textile(value):
     """
     parse textile text
@@ -84,17 +82,15 @@ def textile(value):
         import textile
     except ImportError:
         if settings.DEBUG:
-            raise TemplateSyntaxError("Error in content type: The "
-                "Python textile library isn't installed.")
+            raise TemplateSyntaxError("Error in content type: The python textile library isn't installed.")
         return force_unicode(value)
-    else:
-        return mark_safe(force_unicode(textile.textile(smart_str(value), \
-            encoding='utf-8', output='utf-8')))
+    finally:
+        return mark_safe(force_unicode(textile.textile(smart_str(value), encoding='utf-8', output='utf-8')))
 
 
 class MarkupContent(models.Model):
     """
-    implenment restructured text
+    Markup content type models
     """
     MARKUP_CHOICE = (
         ('rst', 'restructure text'),
@@ -102,8 +98,7 @@ class MarkupContent(models.Model):
         ('textile', 'textile')
     )
     markup = models.TextField(_("Markup Text"), blank=False)
-    markup_type = models.CharField(max_length=10, blank=False,
-        choices=MARKUP_CHOICE)
+    markup_type = models.CharField(max_length=10, blank=False, choices=MARKUP_CHOICE)
     markup_html = models.TextField(blank=False)
 
     form = MarkupContentAdminForm
@@ -120,6 +115,13 @@ class MarkupContent(models.Model):
         verbose_name = _('Markup')
         verbose_name_plural = _('Markup')
 
+    @property
+    def media(self):
+        return forms.Media(
+            css={'all': ('markup/css/markup.css',)},
+            js=(),
+            )
+
     def save(self, *args, **kwargs):
         self.markup_html = self.parser(self.markup, self.markup_type)
         return super(MarkupContent, self).save(*args, **kwargs)
@@ -133,6 +135,9 @@ class MarkupContent(models.Model):
             convert = textile(value)
         return convert
 
-    def render(self, **kwargs):
-        request = kwargs.get('request')
-        return render_to_string('markup/default.html', {'content': self}, context_instance=RequestContext(request))
+    def render(self, request, **kwargs):
+        #request = kwargs.get('request')
+        context = RequestContext(request, {
+            'content': self,
+            })
+        return render_to_string('markup/default.html', context)
