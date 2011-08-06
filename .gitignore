@@ -2,7 +2,7 @@
 *~
 .*.swp
 \#*#
-/secrets.py
+secret_key
 .DS_Store
 ._*
 /MANIFEST

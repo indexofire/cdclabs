@@ -7,6 +7,7 @@ from os.path import (
     basename,
     join,
 )
+from random import choice
 
 
 # Project Path
@@ -91,8 +92,6 @@ INSTALLED_APPS = (
     'feincms',
     'feincms.module.page',
     'feincms.module.medialibrary',
-    #'paging',
-    #'indexer',
     'apps.base',
     #'apps.emboss',
     #'apps.forum',
@@ -106,21 +105,22 @@ INSTALLED_APPS = (
     'contrib.form_designer',
 )
 
-
 ROOT_URLCONF = '%s.urls' % PROJECT_NAME
 
-#SECRET_FILE = normpath(join(SITE_ROOT, 'deploy', 'SECRET'))
-SECRET_KEY = 'r4@l+cguic(r5)rojtu*+txbwz7*v1_k-u_uxukl9tqvu600oq'
-"""
+SECRET_KEY = None
+SECRET_FILE = normpath(join(PROJECT_PATH, 'conf', 'secret_key'))
 try:
-    SECRET_KEY = open(SECRET_FILE).read().strip()
+    f = open(SECRET_FILE)
+    SECRET_KEY = f.read().strip()
 except IOError:
     try:
         with open(SECRET_FILE, 'w') as f:
-            f.write(gen_secret_key(50))
+            f.write(''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)]))
     except IOError:
-    raise Exception('Cannot open file `%s` for writing.' % SECRET_FILE)
-"""
+        raise Exception('Can not open file `%s` for writing.' % SECRET_FILE)
+finally:
+    if f:
+        f.close()
 
 # Logging
 LOGGING = {
