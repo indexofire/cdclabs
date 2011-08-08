@@ -625,3 +625,19 @@ li.nav_item a:hover {
     background: #EEE;
     text-decoration: none;
 }
+.form_submission {
+    padding: 10px;
+    border: 1px solid #CCC;
+    margin-bottom: 10px;
+    display: block;
+}
+.form_submission table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.form_submission th, td {
+    padding: 4px;
+    text-align: left;
+    width: 40%;
+    border-bottom: 1px solid #CCC;
+}

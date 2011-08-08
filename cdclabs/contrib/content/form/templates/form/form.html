@@ -1,5 +1,5 @@
 {% load i18n %}
-<style>
+<style type="text/css">
 th label {
     font-size: 1.5em;
 }
@@ -15,21 +15,22 @@ table tr {
     <h2 class="form_title">{{ content.form.title }}</h2>
   {% endif %}
   {% if form %}
-
+  {% if info %}
+    <div style="padding:20px; background-color: #DBDBDB; border:1px solid #AAAAAA"><h3 style="margin:0px;color:red;">{{ info }}</h3></div>
+    <span class="form_submission">{{ form|safe }}</span>
+  {% else %}
   <form method="post" action="#form{{ content.id }}" class="jqtransform">{% csrf_token %}
     <table>
       {{ form }}
-      {% if is_submitter %}
       <tr>
         <td></td>
         <td>
-          <input type="submit" value="提交">
-          <!--<input type="submit" value="{% trans 'Submit' %}" />-->
+          <input type="submit" value="确定">
         </td>
       </tr>
-      {% endif %}
     </table>
   </form>
+  {% endif %}
   {% else %}
     {{ message|safe }}
   {% endif %}

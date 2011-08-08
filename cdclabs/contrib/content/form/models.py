@@ -62,14 +62,16 @@ class FormContent(models.Model):
                 if form_submission_object.sorted_data()['submitter'] == str(request.user):
                     context = RequestContext(request, {
                         'content': self,
-                        'form': '你已提交结果数据，如果需要修改请联系杭州疾控中心-汪皓秋',
-                        'is_submitter': False,
+                        'info': '你已提交结果数据，如果需要修改请联系杭州疾控中心-汪皓秋',
+                        'form': form_submission_object.formatted_data_html(),
+                        'is_submitter': 0,
                         })
                     return render_to_string(self.template, context)
                 else:
                     context = RequestContext(request, {
                         'content': self,
                         'form': form_instance,
+                        'is_submitter': 1,
                         })
                     return render_to_string(self.template, context)
             except:
