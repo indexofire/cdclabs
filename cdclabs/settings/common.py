@@ -37,7 +37,7 @@ LANGUAGES     = (
 
 # Static File
 MEDIA_ROOT  = join(PROJECT_PATH, 'media')
-STATIC_ROOT = join(PROJECT_PATH, 'statics')
+STATIC_ROOT = join(PROJECT_PATH, 'static')
 MEDIA_URL   = '/media/'
 STATIC_URL  = '/static/'
 TINYMCE_JS_URL      = '/libs/tiny_mce/tiny_mce.js'
