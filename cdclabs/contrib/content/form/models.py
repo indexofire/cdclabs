@@ -9,16 +9,28 @@ from contrib.form_designer.models import Form, FormSubmission
 
 
 class FormContent(models.Model):
+    """
+    It's a content type for feincms.module.page which render basic form
+    HTML content in pages.
+    Usage:
+    Put these lines into anywhere of your app or project which would be
+    invoke.
+        from feincms.module.page.models import Page
+        Page.create_content_type(FormContent)
+    """
+    FIELD_STYLE_CHOICES = (
+        ('jqtransform', 'jqtransformplugin'),
+    )
     form = models.ForeignKey(Form, verbose_name=_('form'),
-        related_name='%(app_label)s_%(class)s_related',
-    )
-    show_form_title = models.BooleanField(_('show form title'), default=True)
+        related_name='%(app_label)s_%(class)s_related',)
+    show_form_title = models.BooleanField(_('show form title'),
+        default=True,)
     success_message = models.TextField(_('success message'),
-        blank=True, help_text=_("Optional custom message to display after valid form is submitted"),
-    )
-    #is_perm = models.BooleanField(_('is submit once'), default=False)
+        blank=True, help_text=_("Optional custom message to display "
+        "after valid form is submitted"),)
     template = 'form/form.html'
-
+    #form_style = models.CharField(choices=FIELD_STYLE_CHOICES,)
+    
     class Meta:
         abstract = True
         verbose_name = _('form content')

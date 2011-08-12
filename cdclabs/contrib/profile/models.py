@@ -109,3 +109,13 @@ class Link(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.title
+
+"""
+class ProfileNode(models.Model):
+    class Meta:
+        __metaclass__ = True
+
+    @classmethod
+    def _extend_profile(cls):
+        pass
+"""

@@ -18,7 +18,7 @@ def authkey_handler(key, user, **kwargs):
             user.is_active = True
             user.save()
             email_template(user.email, 'account/mail/welcome',
-                           user=user, domain=Site.objects.get_current().domain)
+                user=user, domain=Site.objects.get_current().domain)
 
     if user.is_active:
         if 'new_email' == action:

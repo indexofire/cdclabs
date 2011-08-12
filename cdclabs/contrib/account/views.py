@@ -100,10 +100,13 @@ def password_reset(request, form_class=PasswordResetForm):
 
 @render_to('account/login.html')
 def login(request, form_class=LoginForm):
+    """
+    Wrap login action
+    """
     if request.user.is_authenticated():
         return message(request, _('You are already authenticated'))
 
-    if 'POST' == request.method:
+    if request.method == 'POST':
         form = form_class(request.POST, request=request)
     else:
         form = form_class(request=request)
@@ -112,8 +115,7 @@ def login(request, form_class=LoginForm):
     if form.is_valid():
         redirect_url = build_redirect_url(request, settings.LOGIN_REDIRECT_URL)
         return HttpResponseRedirect(redirect_url)
-    return {'form': form,
-            }
+    return {'form': form,}
 
 
 @render_to('account/password_change.html')

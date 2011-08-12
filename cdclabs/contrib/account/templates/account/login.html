@@ -1,14 +1,23 @@
 {% extends "account/base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Log in" %}{% endblock %}
-
+{% block title %}{% trans "log in" %}{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}account/css/account_style.css">
+{% endblock %}
 {% block content %}
 <h1>{% trans "Authorization" %}</h1>
 
 <form class="login-form" method="post">{% csrf_token %}
-  <div class="wide">{{ form.as_table }}</div>
-  <div><input type="submit" value="{% trans 'login' %}" /></div>
+  <div class="form-line">
+    <label for="id_username">{% trans "username" %}:</label>{{ form.username }}
+  </div>
+  <div class="form-line">
+    <label for="id_password">{% trans "password" %}:</label>{{ form.password }}
+  </div>
+  <div class="form-button">
+    <input type="submit" value="{% trans 'login' %}" />
+  </div>
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
 <a href="{% url auth_password_reset %}">{% trans "I forgot password" %}</a>

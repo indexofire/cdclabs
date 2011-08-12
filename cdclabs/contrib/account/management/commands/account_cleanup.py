@@ -1,9 +1,9 @@
+# -*- coding: utf-8 -*-
 from datetime import datetime
-
 from django.core.management.base import BaseCommand
+#from account.models import AuthKey
 
-from account.models import AuthKey
-
+"""
 class Command(BaseCommand):
     help = 'Purge expired AuthKey objects'
 
@@ -12,3 +12,4 @@ class Command(BaseCommand):
         count = qs.count()
         qs.delete()
         print '%d keys deleted' % count
+"""
