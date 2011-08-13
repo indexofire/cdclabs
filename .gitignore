@@ -9,3 +9,4 @@ secret_key
 /_build
 /build
 /dist
+/data

@@ -1,4 +1,3 @@
-{% if DEBUG == False %}{% load analytics %}{% endif %}
 {% load i18n avatar_tags applicationcontent_tags feincms_tags feincms_page_tags %}
 <!DOCTYPE html>
 <html>
@@ -25,6 +24,7 @@ $(function() {function launch() {
     $('table  tr:nth-child(even)').addClass('stripe');}
 );
 </script>
+{% if DEBUG == False %}{% include "analytics.html" %}{% endif %}
 </head>
 
 <body>
