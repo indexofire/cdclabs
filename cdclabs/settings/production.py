@@ -8,6 +8,7 @@ TEMPLATE_DEBUG = DEBUG
 
 INSTALLED_APPS += (
     'gunicorn',
+	'google_analytics',
 )
 
 # Development Database
