@@ -4,6 +4,9 @@ django-debug-toolbar
 lxml
 pygments
 docutils
+markdown
+textile
 django-mptt
 BeautifulSoup
 django-urlauth
+psycopg2
