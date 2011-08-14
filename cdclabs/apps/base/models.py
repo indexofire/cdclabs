@@ -87,19 +87,20 @@ Page.create_content_type(
         ('right', _('right')),
     )
 )
+
 # Add markup content type
 Page.create_content_type(MarkupContent)
 
 # Add google maps content type
-Page.create_content_type(GoogleMapsContent)
+#Page.create_content_type(GoogleMapsContent)
 
 # Add forum application
-Page.create_content_type(
-    ApplicationContent,
-    APPLICATIONS=(
-        ('forum.urls', 'Forum Application'),
-    )
-)
+#Page.create_content_type(
+#    ApplicationContent,
+#    APPLICATIONS=(
+#        ('forum.urls', 'Forum Application'),
+#    )
+#)
 
 # Add form content type
 Page.create_content_type(FormContent)

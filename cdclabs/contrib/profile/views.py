@@ -18,7 +18,6 @@ def profile_list(request):
     )
 profile_list.__doc__ = list_detail.object_list.__doc__
 
-
 def profile_detail(request, username):
     try:
         user = User.objects.get(username__iexact=username)
@@ -26,12 +25,14 @@ def profile_detail(request, username):
         raise Http404
     profile = Profile.objects.get(user=user)
     context = {'object': profile,}
-    return render_to_response('profile/profile_detail.html', context, context_instance=RequestContext(request))
-
+    return render_to_response('profile/profile_detail.html',
+        context, context_instance=RequestContext(request))
 
 @login_required
 def profile_edit(request, template_name='profile/profile_form.html'):
-    """Edit profile."""
+    """
+    Edit profile.
+    """
     if request.POST:
         profile = Profile.objects.get(user=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)

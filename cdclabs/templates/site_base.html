@@ -1,16 +1,19 @@
-{% load i18n avatar_tags applicationcontent_tags feincms_tags feincms_page_tags %}
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+<head>{% load i18n avatar_tags applicationcontent_tags feincms_tags feincms_page_tags %}
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="description" content="">
+  <meta name="author" content="Mark Renton">
+  <link rel="shortcut icon" href="{{ STATIC_URL }}/favicon.ico">
   <title>{% block title %}{{ feincms_page.title }}{% endblock title %}</title>
   {% block meta %}{% endblock meta %}
-  <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/global_style.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/global_style.css" />
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script type="text/javascript" src="{{ MEDIA_URL }}js/lightbox_me/jquery.lightbox_me.js"></script>
-  {% block extra_head %}{% endblock extra_head %}{{ feincms_page.content.media }}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/lightbox_me/jquery.lightbox_me.js"></script>
+  {% block extra_head %}{% endblock extra_head %}
+  {{ feincms_page.content.media }}
   {{ feincms_page.object.media }}
-<script type="text/javascript" charset="utf-8">
+  <script type="text/javascript" charset="utf-8">
 $(function() {function launch() {
     $('#sign_up').lightbox_me({centered: true, onLoad: function() {
         $('#sign_up').find('input:first').focus()
@@ -21,10 +24,10 @@ $(function() {function launch() {
         setTimeout(launch, 100);
         return false;
         });
-    $('table  tr:nth-child(even)').addClass('stripe');}
+    $('table tr:nth-child(even)').addClass('stripe');}
 );
-</script>
-{% if DEBUG == False %}{% include "analytics.html" %}{% endif %}
+  </script>
+{% if GOOGLE_ANALYTICS %}{% include "analytics.html" %}{% endif %}
 </head>
 
 <body>
@@ -54,33 +57,35 @@ $(function() {function launch() {
 </div>
 
 <div id="sign_up" style="display: none; background: #EEEEEE; padding: 20px; border:2px sold #4a4a4a">
-<h1>{% trans "Authorization" %}</h1>
-<form class="login-form" method="post" action="/account/login/">{% csrf_token %}
-  <div class="wide">
-    <label for="id_username">帐号:</label>
-    <input type="text" name="username" id="id_username">
-    <label for="id_password">密码:</label>
-    <input type="password" name="password" id="id_password">
-  </div>
-  <div><input type="submit" value="{% trans 'login' %}" /></div>
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-<a href="{% url auth_password_reset %}">{% trans "I forgot password" %}</a>
+  <h1>{% trans "Authorization" %}</h1>
+  <form class="login-form" method="post" action="/account/login/">{% csrf_token %}
+    <div class="wide">
+      <label for="id_username">帐号:</label>
+      <input type="text" name="username" id="id_username">
+      <label for="id_password">密码:</label>
+      <input type="password" name="password" id="id_password">
+    </div>
+    <div>
+      <input type="submit" value="{% trans 'login' %}" />
+    </div>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  <a href="{% url auth_password_reset %}">{% trans "I forgot password" %}</a>
 </div>
 
 <div id="header_sub" class="clearfix">
   <div class="container clear">
     <div class="span-6">
-    <div id="front_title"><a href="/" style="text-decoration: none">
-      <h1>HZCDC * Labs</h1>
-      <div>杭州市疾病预防控制中心实验室</div></a>
+      <div id="front_title">
+        <a href="/" style="text-decoration: none"><h1>HZCDC * Labs</h1><div>杭州市疾病预防控制中心实验室</div></a>
+      </div>
     </div>
-    </div>
-    <div class="span-18 last">
-    </div>
+    <div class="span-18 last"></div>
   </div>
 </div>
-
+<div class="container clear">
+  <div class="span-24 last">{% feincms_breadcrumbs feincms_page %}</div>
+</div>
 <div class="container clear">
   <div class="content">{% block content %}{% endblock content %}</div>
 </div>
