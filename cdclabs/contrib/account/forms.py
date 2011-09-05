@@ -7,15 +7,17 @@ from django.utils.translation import ugettext as _
 from django.template import loader
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
-from account.util import load_class
+from .util import load_class
+from .settings import *
 
 
-UserModel = load_class(settings.ACCOUNT_USER_MODEL)
+UserModel = load_class(USER_MODEL)
 
-if settings.ACCOUNT_CAPTCHA_ENABLED:
-    CaptchaField = load_class(settings.ACCOUNT_CAPTCHA_FIELD)
+if CAPTCHA_ENABLED:
+    CaptchaField = load_class(CAPTCHA_FIELD)
 
-RE_USERNAME = getattr(settings, 'ACCOUNT_RE_USERNAME', re.compile(r'[a-z0-9][_a-z0-9]*[a-z0-9]$', re.I))
+RE_USERNAME = getattr(settings, 'ACCOUNT_RE_USERNAME',
+    re.compile(r'[a-z0-9][_a-z0-9]*[a-z0-9]$', re.I))
 USERNAME_MIN_LENGTH = getattr(settings, 'ACCOUNT_USERNAME_MIN_LENGTH', 3)
 USERNAME_MAX_LENGTH = getattr(settings, 'ACCOUNT_USERNAME_MAX_LENGTH', 20)
 PASSWORD_MIN_LENGTH = getattr(settings, 'ACCOUNT_PASSWORD_MIN_LENGTH', 3)

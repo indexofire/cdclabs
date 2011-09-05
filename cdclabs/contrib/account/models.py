@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-import account.signals
+import contrib.account.signals

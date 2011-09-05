@@ -4,7 +4,7 @@ from django.dispatch import Signal
 from django.contrib.sites.models import Site
 from urlauth.signals import authkey_processed
 from urlauth.models import AuthKey
-from account.util import email_template
+from contrib.account.util import email_template
 
 
 account_created = Signal(providing_args=['user', 'request'])

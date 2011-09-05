@@ -39,7 +39,7 @@ urlpatterns = patterns('contrib.account.views',
         name='auth_password_change_done'),
 
     # Email management
-    url(r'^email/change/$', 'email_change', name='auth_email_change'),
-    url(r'^email/change/done/$', 'email_change_done',
-        name='auth_email_change_done'),
+    #url(r'^email/change/$', 'email_change', name='auth_email_change'),
+    #url(r'^email/change/done/$', 'email_change_done',
+    #    name='auth_email_change_done'),
 )

@@ -25,9 +25,9 @@ class FormContent(models.Model):
         related_name='%(app_label)s_%(class)s_related',)
     show_form_title = models.BooleanField(_('show form title'),
         default=True,)
-    success_message = models.TextField(_('success message'),
-        blank=True, help_text=_("Optional custom message to display "
-        "after valid form is submitted"),)
+    success_message = models.TextField(_('success message'), blank=True,
+        help_text=_("Optional custom message to display after valid form is "
+        "submitted"),)
     template = 'form/form.html'
     #form_style = models.CharField(choices=FIELD_STYLE_CHOICES,)
     

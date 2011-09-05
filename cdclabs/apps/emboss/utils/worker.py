@@ -15,12 +15,12 @@ class Executor(object):
 
         `exec_handler`:
         """
-        self.__generator = generator
+        self.__generator    = generator
         self.__exec_handler = exec_handler
-        self.__throw = generator.throw
-        self.__send = generator.send
-        self.__next = generator.next
-        self.__close = generator.close
+        self.__throw        = generator.throw
+        self.__send         = generator.send
+        self.__next         = generator.next
+        self.__close        = generator.close
 
     def __iter__(self):
         return self

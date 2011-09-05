@@ -59,19 +59,16 @@ feincms.jQuery(function($){
 			var pageId = extract_item_id($('.page_marker', el).attr('id'));
 			$(el).attr('id', 'item-' + pageId);
 			if (feincms.tree_structure[pageId].length) {
-			    $('.page_marker', el).addClass('children');
+					$('.page_marker', el).addClass('children');
 			}
 
 			// set 'level' on rel attribute
 			var pixels = $('.page_marker', el).css('width').replace(/[^\d]/ig,"");
 			var rel = Math.round(pixels/18);
 			$(el).attr('rel', rel);
-
-			// add drag handle to actions col
-			$(el).find('td:last').append(' <div class="drag_handle"></div>');
 		});
 
-	    $('div.drag_handle').bind('mousedown', function(event) {
+			$('div.drag_handle').bind('mousedown', function(event) {
 			BEFORE = 0;
 			AFTER = 1;
 			CHILD = 2;
@@ -143,7 +140,7 @@ feincms.jQuery(function($){
 								targetLoc = AFTER;
 							} else {
 								targetRow = element;
-							 	targetLoc = CHILD;
+								targetLoc = CHILD;
 							}
 						}
 
@@ -156,7 +153,7 @@ feincms.jQuery(function($){
 								'top': targetRow.offset().top + (targetLoc == AFTER || targetLoc == CHILD ? rowHeight: 0) -1
 							});
 
-			        		// Store the found row and options
+									// Store the found row and options
 							moveTo.hovering = element;
 							moveTo.relativeTo = targetRow;
 							moveTo.side = targetLoc;
@@ -165,6 +162,15 @@ feincms.jQuery(function($){
 						}
 					}
 				});
+			});
+
+			$('body').keydown(function(event) {
+				if (event.which == '27') {
+					$("#drag_line").remove();
+					$("#ghost").remove();
+					$("body").enableSelection().unbind('mousemove').unbind('mouseup');
+					event.preventDefault();
+				}
 			});
 
 			$("body").bind('mouseup', function(event) {
@@ -188,7 +194,7 @@ feincms.jQuery(function($){
 						'cut_item': cutItem,
 						'pasted_on': pastedOn
 					}, function(data) {
-					    window.location.reload();
+							window.location.reload();
 					});
 				} else {
 					$("#drag_line").remove();
@@ -212,8 +218,12 @@ feincms.jQuery(function($){
     function retrieveCollapsedNodes() {
         var n = $.cookie('feincms_collapsed_nodes');
         if(n != null) {
-            n = $.parseJSON(n);
+            try {
+                n = $.parseJSON(n);
+            } catch(e) {
+                n = null;
             }
+        }
         return n;
     }
 

@@ -1,0 +1,15 @@
+{% load i18n %}
+<div class="signup_login_form_wrapper">
+<h3>Sign Up:</h3>
+{% include "account/includes/signup_form.html" %}
+</div>
+
+<div class="signup_login_form_wrapper">
+<h3>Log In:</h3>
+{% include "account/includes/login_form.html" %}
+</div>
+
+<span class="signup_login_forgot_password">
+{% trans "Forgot your password?" %}
+<a href="{% if iframe %}{% url auth_password_reset_iframe %}{% else %}{% url auth_password_reset %}{% endif %}">{% trans "Reset your password" %}</a>.
+</span>

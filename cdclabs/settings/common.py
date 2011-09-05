@@ -153,5 +153,3 @@ MARKUP_CODE_HIGHTLIGHT = True
 FEINCMS_RICHTEXT_INIT_CONTEXT = {
     'TINYMCE_JS_URL': '%sjs/tiny_mce/tiny_mce.js' % MEDIA_URL,
 }
-
-from contrib.account.settings import *
