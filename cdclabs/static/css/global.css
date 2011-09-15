@@ -1,0 +1,65 @@
+@import 'reset.css';
+body {
+    background: #ECECEC url(../image/pattern.png) repeat top left;
+    padding: 0px;
+    margin: 0px;
+}
+#header {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 64px;
+     background: #2f2f2f;
+    /*background: #2F2F2F url(../image/bg.png) repeat top left;*/
+    border-bottom: 1px solid #222;
+    margin-bottom: 0px;
+}
+
+#header h1 {
+    float: left;
+    margin: 0px;
+    height: 64px;
+}
+#header h1 a {
+    color: #ECECEC;
+    float: left;
+    padding: 16px 0px;
+}
+#header ul {
+    height: 64px;
+    float: right;
+    margin: 0px;
+}
+#header ul li {
+    float: left;
+    margin: 15px 0px;
+    display: block;
+}
+#header ul li a {
+    padding: 5px 4px;
+    color: #ECECEC;
+    display: block;
+}
+#header ul li a:hover {
+    background: #E2E2E2;
+    color: #2C2C2C;
+    text-decoration: none;
+}
+#breadcrumb {
+    margin: 5px 0px;
+    padding: 10px 0px;
+    border: 1px solid #D0D0D0;
+    background: #F3F3F3;
+}
+#breadcrumb ul li {
+    margin: 0px 4px;
+    float: left;
+}
+#breadcrumb ul li a {
+    padding: 4px;
+}
+#breadcrumb ul li a:hover {
+    background: #333;
+    color: #EEE;
+    text-decoration: none;
+}

@@ -23,16 +23,6 @@ urlpatterns = patterns('',
     #url(r'^(.*)/$', 'feincms.views.base.handler', name='feincms_handler'),
 )
 
-urlpatterns += patterns('',
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
-        {'sitemaps': sitemaps},
-    ),
-)
-
-urlpatterns += patterns('',
-    url(r'', include('feincms.urls')),
-)
-
 if settings.DEBUG:
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
@@ -42,3 +32,13 @@ if settings.DEBUG:
             {'document_root': settings.STATIC_ROOT},
         ),
     )
+
+urlpatterns += patterns('',
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+        {'sitemaps': sitemaps},
+    ),
+)
+
+urlpatterns += patterns('',
+    url(r'', include('feincms.urls')),
+)

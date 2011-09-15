@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-from os.path import (
-    dirname,
-    abspath,
-    normpath,
-    basename,
-    join,
-)
+from os.path import dirname, abspath, normpath, basename, join
 from random import choice
 
 

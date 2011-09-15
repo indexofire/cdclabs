@@ -1,0 +1,108 @@
+/* -------------------------------------------------------------------
+// ReST!
+// ------------------------------------------------------------------*/
+.ReST .markItUpButton1 a {
+    background-image:url(images/h1.png); 
+}
+.ReST .markItUpButton2 a {
+    background-image:url(images/h2.png); 
+}
+.ReST .markItUpButton3 a {
+    background-image:url(images/h3.png); 
+}
+.ReST .markItUpButton4 a {
+    background-image:url(images/h4.png); 
+}
+.ReST .markItUpButton5 a {
+    background-image:url(images/h5.png); 
+}
+.ReST .markItUpButton6 a {
+    background-image:url(images/h6.png); 
+}
+
+.ReST .markItUpButton7 a {
+    background-image:url(images/bold.png);
+}
+.ReST .markItUpButton8 a {
+    background-image:url(images/italic.png);
+}
+
+.ReST .markItUpButton9 a {
+    background-image:url(images/list-bullet.png);
+}
+.ReST .markItUpButton10 a {
+    background-image:url(images/list-numeric.png);
+}
+
+.ReST .markItUpButton11 a {
+    background-image:url(images/picture.png); 
+}
+.ReST .markItUpButton12 a {
+    background-image:url(images/link.png);
+}
+
+.ReST .markItUpButton13 a    {
+    background-image:url(images/quotes.png);
+}
+.ReST .markItUpButton14 a    {
+    background-image:url(images/code.png);
+}
+
+.ReST .preview a {
+    background-image:url(images/preview.png);
+}
+
+.ReST .markItUpHeader ul {
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+.ReST .markItUpHeader a:hover {
+    border-bottom: none;
+}
+
+/* Overlay */
+#simplemodal-overlay {
+    height:100%;
+    width:100%;
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:3000;
+    background-color:#000000;
+}
+
+/* Container */
+#simplemodal-container {
+    position:fixed;
+    margin:0 auto 0 auto;
+    left:50%;
+    top:10%;
+    z-index:3100;
+    background-color:#fff;
+    border:3px solid #3C769D;
+}
+
+#simplemodal-container a.modalCloseImg {
+    background: url(images/close.png) no-repeat;
+    width:25px;
+    height:29px;
+    display:inline;
+    z-index:3200;
+    position:absolute;
+    top:-15px;
+    right:-16px;
+    cursor:pointer;
+}
+
+#simplemodal-container {
+    width:600px;
+    height:400px;
+    padding: 10px;
+    margin: 0px;
+}
+#simplemodal-container iframe {
+    width:100%;
+    height:100%;
+    border:none;
+}
