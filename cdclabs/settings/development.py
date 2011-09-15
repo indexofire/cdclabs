@@ -8,10 +8,12 @@ TEMPLATE_DEBUG = DEBUG
 
 MIDDLEWARE_CLASSES += (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'reversion.middleware.RevisionMiddleware',
 )
 INSTALLED_APPS += (
     'south',
     'debug_toolbar',
+    #'reversion',
 )
 
 # Development Database

@@ -117,3 +117,6 @@ Page.create_content_type(MediaFileContent, POSITION_CHOICES=(
 
 # Add raw content type
 Page.create_content_type(RawContent)
+
+# Create reversion
+Page.register_with_reversion()
