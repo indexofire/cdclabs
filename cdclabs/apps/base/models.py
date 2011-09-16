@@ -7,7 +7,7 @@ from feincms.content.application.models import ApplicationContent
 from feincms.content.richtext.models import RichTextContent
 from feincms.content.image.models import ImageContent
 from feincms.content.comments.models import CommentsContent
-from feincms.content.medialibrary.models import MediaFileContent
+from feincms.content.medialibrary.v2 import MediaFileContent
 from feincms.content.raw.models import RawContent
 from contrib.content.googlemaps.models import GoogleMapsContent
 from contrib.content.markup.models import MarkupContent
@@ -109,14 +109,16 @@ Page.create_content_type(FormContent)
 Page.create_content_type(CommentsContent)
 
 # Add Media Library
-Page.create_content_type(MediaFileContent, POSITION_CHOICES=(
-    ('block', _('block')),
-    ('left', _('left')),
-    ('right', _('right')),
-    ))
+Page.create_content_type(
+    MediaFileContent,
+    TYPE_CHOICES=(
+        ('lightbox', _('lightbox')),
+        ('download', _('download')),
+    )
+)
 
 # Add raw content type
 Page.create_content_type(RawContent)
 
 # Create reversion
-Page.register_with_reversion()
+#Page.register_with_reversion()

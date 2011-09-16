@@ -1,10 +1,10 @@
-<!doctype html>
+{% block doctype %}<!doctype html>{% endblock doctype %}
 <html>
 <head>{% load i18n avatar_tags applicationcontent_tags feincms_tags feincms_page_tags %}
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="description" content="">
   <meta name="author" content="Mark Renton">
-  <link rel="shortcut icon" href="{{ STATIC_URL }}/favicon.ico">
+  <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico">
   <title>{% block title %}{{ feincms_page.title }}{% endblock title %}</title>
   {% block meta %}{% endblock meta %}
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/global_style.css" />
@@ -13,7 +13,7 @@
   {% block extra_head %}{% endblock extra_head %}
   {{ feincms_page.content.media }}
   {{ feincms_page.object.media }}
-  <script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 $(function() {function launch() {
     $('#sign_up').lightbox_me({centered: true, onLoad: function() {
         $('#sign_up').find('input:first').focus()
@@ -26,7 +26,7 @@ $(function() {function launch() {
         });
     $('table tr:nth-child(even)').addClass('stripe');}
 );
-  </script>
+</script>
 {% if GOOGLE_ANALYTICS %}{% include "analytics.html" %}{% endif %}
 </head>
 

@@ -20,7 +20,6 @@ class ProfileBase(models.Model):
     # @@@ could be unique=True if subclasses don't inherit a concrete base class
     # @@@ need to look at this more
     user = models.ForeignKey(User, verbose_name=_("user"))
-    profile_slug = ClassProperty(classmethod(_default_profile_slug))
 
     class Meta:
         verbose_name = _("profile")
@@ -45,6 +44,8 @@ class ProfileBase(models.Model):
 
     def _default_profile_slug(cls):
         return cls._meta.module_name
+
+    profile_slug = ClassProperty(classmethod(_default_profile_slug))
 
 def create_profile(sender, instance=None, **kwargs):
     if instance is None:

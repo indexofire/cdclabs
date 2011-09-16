@@ -15,6 +15,7 @@ sitemaps = {'pages' : PageSitemap}
 
 urlpatterns = patterns('',
     url(r'^favicon\.ico/$', redirect_to, {'url': '/media/favicon.ico'}),
+    url(r'^mercury/', include('mercury.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('contrib.account.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
